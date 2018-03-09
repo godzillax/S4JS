@@ -16,13 +16,13 @@ function Dinovaders() {
 
 	this.init = function () {
 		this.player = new Player();
-		this.ennemies = new Enemy();
+//		this.ennemies = new Enemy();
 		this.wave = 1;
 	}
 
 	this.go = function () {
 	    this.player.init();
-	    this.enemy.init();
+//	    this.enemy.init();
 	    document.body.addEventListener("keydown", gererMouvements);
 	}
 
