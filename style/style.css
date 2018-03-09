@@ -1,5 +1,7 @@
-div#playground {
+body {
 	position:fixed;
+}
+div#playground {
 	width:1200px;
 	height:800px;
 	background-image : url("../Images/Background.png");
@@ -11,7 +13,6 @@ div#hp {
 	height: 30px;
 	top : 15px;
 	left : 15px;
-	background: blue;
 }
 
 div#announcer {
@@ -20,7 +21,6 @@ div#announcer {
 	height: 100px;
 	top : 340px;
 	left : 400px;
-	background: red;
 }
 
 div#score {
@@ -29,15 +29,26 @@ div#score {
 	height: 30px;
 	top : 15px;
 	left : 1050px;
-	background: cyan;
+}
+
+div#score p {
+	position:fixed;
+	color:white;
+	text-align: center;
+	font-size : 20px;
 }
 
 div#player {
-	background:black;
 	position:fixed;
 	width : 90px;
 	height: 75px;
 	top : 350px;
 	left : 75px;
+}
+
+div#enemy {
+	position:fixed;
+	width : 1200px;
+	height: 800px;
 }
 
