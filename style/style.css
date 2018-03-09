@@ -32,3 +32,12 @@ div#score {
 	background: cyan;
 }
 
+div#player {
+	background:black;
+	position:fixed;
+	width : 90px;
+	height: 75px;
+	top : 350px;
+	left : 75px;
+}
+
