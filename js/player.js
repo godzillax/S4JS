@@ -1,10 +1,10 @@
 function Player() {
-	this.balise_perso = document.getElementById('player');
 	this.coordX = this.balise_perso.style.left;
 	this.coordY = this.balise_perso.style.top;
 	this.score = 0;
 	this.hp = 5;
 	this.init = function() {
+		this.balise_perso = document.getElementById('player');
 		this.coordX = this.balise_perso.style.left;
 		this.coordY = this.balise_perso.style.top;
 		this.balise_perso.src = '../Images/player.png';
