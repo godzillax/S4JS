@@ -1,8 +1,9 @@
 function Player() {
-	this.coordX = this.balise_perso.style.left;
-	this.coordY = this.balise_perso.style.top;
+	this.coordY;
+	this.coordX;
 	this.score = 0;
 	this.hp = 5;
+	this.balise_perso;
 	this.init = function() {
 		this.balise_perso = document.getElementById('player');
 		this.coordX = this.balise_perso.style.left;
