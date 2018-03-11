@@ -11,13 +11,13 @@
 function Dinovaders() {
 	this.player;
 	this.ennemies;
-	this.wave;
+	this.wave = 1;
 
 
 	this.init = function () {
 		this.player = new Player();
 //		this.ennemies = new Enemy();
-		this.wave = 1;
+		this.wave;
 	}
 
 	this.go = function () {

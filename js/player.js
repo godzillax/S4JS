@@ -8,12 +8,19 @@ function Player() {
 		this.balise_perso = document.getElementById('player');
 		this.coordX = this.balise_perso.style.left;
 		this.coordY = this.balise_perso.style.top;
-		this.balise_perso.src = '../Images/player.png';
+		//this.balise_perso.src = '../Images/player.png';
 		this.spawn();	
 	}
 	this.spawn = function() {
-		this.balise_perso.style.top = this.coordY + "px";
-		this.balise_perso.style.left = this.coordX + "px";
+                img = document.createElement("img");
+                img.src = "./Images/player.png";
+                img.style.position = "absolute";
+                img.style.top = this.coordY + "px";
+                img.style.left = this.coordX + "px";
+                img.style.width = "100%";
+                this.balise_perso.appendChild(img);
+//		this.balise_perso.style.top = this.coordY + "px";
+//		this.balise_perso.style.left = this.coordX + "px";
 	}
 	this.move = function(direction) {
 		if(direction == 0) {
