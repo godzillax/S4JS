@@ -21,7 +21,7 @@ function Shot(shooter) {
         } else {
             this.img_shoot.src = "./Images/Bullet.png";
         }
-        this.img_shoot.style.width = "20px";
+        this.img_shoot.style.width = "25px";
         this.img_shoot.style.position = "fixed";
 
         this.coordX = shooter.coordX + shooter.width;
