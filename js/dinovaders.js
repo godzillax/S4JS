@@ -10,6 +10,7 @@
  */
 function initGame() {
     player = new Player();
+    
     this.player.init();
 
     document.body.addEventListener("keydown", playerAction);

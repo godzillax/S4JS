@@ -74,6 +74,9 @@ function Player() {
     
     /**
      * Creates a Shot
+     * 
+     * A AJOUTER DANS UN TABLEAU DANS LE MAIN, LE DEPLACEMENT DE LA BALLE SE FAIT DANS
+     * LE MAINLOOP DU MAIN JUSQU'A SA MORT
      */
     this.shoot = function () {
         shot = new Shot(this);
