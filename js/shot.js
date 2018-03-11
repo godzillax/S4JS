@@ -57,24 +57,26 @@ function Shot(shooter) {
 	* The bullet goes left
 	*/
 	this.left = function() {
-		if(this.coordX > 0) {
+		while(this.coordX > 0) {
 			this.coordX = this.coordX-10;
 			this.spawn();
-		} else {
-			this.death();
-		}
+		} 
+		// else {
+		// 	this.death();
+		// }
 	}
 
 	/**
 	* The bullet goes right
 	*/
 	this.right = function() {
-		if(this.coordX < window.innerWidth) {
+		while(this.coordX < window.innerWidth-400) {
 			this.coordX = this.coordX+10;
 			this.spawn();
-		} else {
-			this.death();
-		}
+		} 
+		// else {
+		// 	this.death();
+		// }
 	}
 
 	/**
