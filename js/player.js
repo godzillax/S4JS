@@ -1,12 +1,13 @@
 function Player() {
     this.coordX = 75;
-    this.coordY = 350;
+    this.coordY;
     this.score = 0;
     this.hp = 5;
     this.balise_perso;
 
     this.init = function () {
         this.balise_perso = document.getElementById('player');
+        this.coordY = (window.innerHeight/2)-50;
         this.spawn();
     }
     
@@ -28,14 +29,14 @@ function Player() {
     }
     
     this.up = function () {
-        if (this.coordY > -20) {
+        if (this.coordY > -30) {
             this.coordY = this.coordY-10;
             this.spawn();
         }
     }
     
     this.down = function () {
-        if (this.coordY < 760) {
+        if (this.coordY < window.innerHeight-60) {
             this.coordY = this.coordY+10;
             this.spawn();
         }

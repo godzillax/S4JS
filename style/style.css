@@ -1,34 +1,37 @@
 body {
 	position:fixed;
-}
-div#playground {
-	width:1200px;
-	height:800px;
-	background-image : url("../Images/Background.png");
+        
 }
 
+
+div#playground {
+    position : fixed;
+    top : 0%;
+    left : 0%;
+    width : 100vw;
+    height : 100vh;
+    background-image : url("../Images/Background.png");
+}
 div#hp {
 	position:fixed;
 	width : 200px;
 	height: 30px;
-	top : 15px;
-	left : 15px;
+	left : 1%;
 }
 
 div#announcer {
 	position:fixed;
 	width : 400px;
 	height: 100px;
-	top : 340px;
-	left : 400px;
+	top : 40%;
+	left : 40%;
 }
 
 div#score {
 	position:fixed;
 	width : 150px;
 	height: 30px;
-	top : 15px;
-	left : 1050px;
+	left : 90%;
 }
 
 div#score p {
@@ -48,7 +51,5 @@ div#player {
 
 div#enemy {
 	position:fixed;
-	width : 1200px;
-	height: 800px;
 }
 
