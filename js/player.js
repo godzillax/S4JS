@@ -5,6 +5,9 @@ function Player() {
     this.score = 0;
     this.hp = 5;
     
+    this.width = 90;
+    this.height = 75;
+    
     // Will contain the div#player
     this.balise_perso;
     
@@ -75,7 +78,7 @@ function Player() {
     this.shoot = function () {
         shot = new Shot(this);
         shot.init();
-        shot.move();
+        shot.right();
     }
     
     /**
