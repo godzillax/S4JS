@@ -5,23 +5,29 @@
 //////////////////////////////////////////////////////
 
 
+/**
+ * Called when the page loads. It will initiates all the elements, then launch the game
+ */
 function initGame() {
     player = new Player();
+    this.player.init();
     go();
 }
+
+/**
+ * Launches the game
+ */
 function go() {
-    this.player.init();
-//	    this.enemy.init();
     document.body.addEventListener("keydown", playerAction);
     this.mainLoop();
 }
 
-
+/**
+ * Manages the player Actions
+ * @param {type} event
+ */
 function playerAction (event) {
-    // l'event récupéré sera un keydown
     var k = event.keyCode;
-    // k contient le code touche de la touche pressée
-
     // Up or Z
     if (k == 38 || k == 90) 
         player.up();
@@ -33,6 +39,9 @@ function playerAction (event) {
         player.shoot();
 }
 
+/**
+ * Main Loop of the Game
+ */
 function mainLoop() {
 
 }

@@ -1,25 +1,45 @@
+
 function Player() {
     this.coordX = 75;
     this.coordY;
     this.score = 0;
     this.hp = 5;
+    
+    // Will contain the div#player
     this.balise_perso;
-
+    
+    // The img html tag 
+    this.img;
+    this.isHit = 0;
+    
+    /**
+     * Called when the game is initialised. 
+     * Initiates the player
+     */
     this.init = function () {
         this.balise_perso = document.getElementById('player');
+        this.img = document.createElement("img");
+        this.img.src = "./Images/player.png";
+        this.img.style.width = "100%";
         this.coordY = (window.innerHeight/2)-50;
         this.spawn();
     }
     
+    /**
+     * Places the player on the screen
+     */
     this.spawn = function () {
         this.balise_perso.innerHTML = "";
         this.balise_perso.style.top = this.coordY + "px";
-        img = document.createElement("img");
-        img.src = "./Images/player.png";
-        img.style.width = "100%";
-        this.balise_perso.appendChild(img);
+        this.balise_perso.appendChild(this.img);
     }
     
+    /**
+     * Moves the player
+     * @param {type} direction :
+     *                  - 0 : up
+     *                  - else : down
+     */
     this.move = function (direction) {
         if (direction == 0) {
             this.up();
@@ -28,6 +48,9 @@ function Player() {
         }
     }
     
+    /**
+     * Moves the player up
+     */
     this.up = function () {
         if (this.coordY > -30) {
             this.coordY = this.coordY-10;
@@ -35,24 +58,34 @@ function Player() {
         }
     }
     
+     /**
+     * Moves the player down
+     */
     this.down = function () {
-        if (this.coordY < window.innerHeight-60) {
+        if (this.coordY < window.innerHeight-50) {
             this.coordY = this.coordY+10;
             this.spawn();
         }
         
     }
     
+    /**
+     * Creates a Shot
+     */
     this.shoot = function () {
 
     }
     
-    this.hit = function (bullet) {
-        if (this.hp == 0) {
+    /**
+     * When the player is hit, he will lose HP and may die if its HP reach 0
+     */
+    this.hit = function () {
+        this.isHit = 1;
+        this.hp--;
+        if (this.hp <= 0) {
             this.death();
         } else {
-            this.hp--;
-            this.balise_perso.src = '../Images/playerHit.png';
+            this.img.src = './Images/playerHit.png';
         }
     }
     
