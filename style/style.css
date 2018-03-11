@@ -49,6 +49,10 @@ div#player {
 	left : 75px;
 }
 
+div#player div {
+	position:fixed;
+}
+
 div#enemy {
 	position:fixed;
 }

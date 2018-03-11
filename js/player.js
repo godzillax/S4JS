@@ -73,11 +73,13 @@ function Player() {
      * Creates a Shot
      */
     this.shoot = function () {
-
+        shot = new Shot(this);
+        shot.init();
+        shot.move();
     }
     
     /**
-     * When the player is hit, he will lose HP and may die if its HP reach 0
+     * When the player is hit, they will lose HP and may die if their HP reaches 0
      */
     this.hit = function () {
         this.isHit = 1;
@@ -90,6 +92,6 @@ function Player() {
     }
     
     this.death = function () {
-        this.balise_perso.src = '';
+        this.img.src = '';
     }
 }

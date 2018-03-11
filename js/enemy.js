@@ -1,4 +1,4 @@
-function enemy(x, y, hp, speed, size, pace, points){
+function Enemy(x, y, hp, speed, size, pace, points){
     this.coordX;
     this.coordY;
     this.health;
