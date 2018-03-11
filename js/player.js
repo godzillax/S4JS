@@ -11,7 +11,6 @@ function Player() {
     }
     
     this.spawn = function () {
-        console.log(this.coordY);
         this.balise_perso.innerHTML = "";
         this.balise_perso.style.top = this.coordY + "px";
         img = document.createElement("img");
@@ -29,17 +28,18 @@ function Player() {
     }
     
     this.up = function () {
-        if (this.coordY > 1) {
-            this.coordY--;
+        if (this.coordY > -20) {
+            this.coordY = this.coordY-10;
             this.spawn();
         }
     }
     
     this.down = function () {
-        if (this.coordY < 1000) {
-            this.coordY++;
+        if (this.coordY < 760) {
+            this.coordY = this.coordY+10;
             this.spawn();
         }
+        
     }
     
     this.shoot = function () {

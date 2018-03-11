@@ -5,55 +5,35 @@
 //////////////////////////////////////////////////////
 
 
-/**
- 
- */
-function Dinovaders() {
-    this.player;
-    this.ennemies;
-    this.wave = 1;
-
-
-    this.init = function () {
-        this.player = new Player();
-//		this.ennemies = new Enemy();
-        this.wave;
-        this.go();
-    }
-
-    this.go = function () {
-        this.player.init();
+function initGame() {
+    player = new Player();
+    go();
+}
+function go() {
+    this.player.init();
 //	    this.enemy.init();
-        document.body.addEventListener("keydown", this.gererMouvements);
-        this.mainLoop();
-    }
-
-
-    this.gererMouvements = function (event) {
-        // l'event récupéré sera un keydown
-        var k = event.keyCode;
-        // k contient le code touche de la touche pressée
-        // en fonction de la valeur de k, on agit.
-        // "haut"   a le code touche 38
-        // "bas"    a le code touche 40
-        // "ESPACE" a le code touche 32
-        switch (k) {
-            case 38 :
-                this.player.up();
-                break;
-            case 40 :
-                this.player.down();
-                break;
-            default :
-        }
-    }
-
-    this.mainLoop = function () {
-
-    }
+    document.body.addEventListener("keydown", playerAction);
+    this.mainLoop();
 }
 
-    din = new Dinovaders();
-    din.init();
 
+function playerAction (event) {
+    // l'event récupéré sera un keydown
+    var k = event.keyCode;
+    // k contient le code touche de la touche pressée
+
+    // Up or Z
+    if (k == 38 || k == 90) 
+        player.up();
+    // Down or S 
+    else if (k == 40 || k == 83) 
+        player.down();
+    // Space
+    else if (k == 32)
+        player.shoot();
+}
+
+function mainLoop() {
+
+}
 
