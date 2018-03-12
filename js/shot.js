@@ -10,8 +10,6 @@ function Shot(shooter) {
     // div#shot
     this.balise_shoot;
 
-    this.shot;
-
     //Object.getPrototypeOf(shooter).constructor.name
 
     this.init = function () {
