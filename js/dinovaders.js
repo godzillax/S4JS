@@ -46,6 +46,10 @@ function playerAction(event) {
         lastPressedKey = event.keyCode;
 }
 
+/**
+ * Reset the control when the player release a key
+ * @param {type} event
+ */
 function playerActionEnd(event) {
     if (event.keyCode == lastPressedKey)
         lastPressedKey = 0;

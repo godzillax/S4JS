@@ -6,7 +6,9 @@ function Player() {
     this.hp = 5;
 
     // Shoot cadency in ms
-    this.cadency = 0.25;
+    this.cadency = 0.33;
+    
+    // The time when the last shot was fired by the object
     this.lastShot = 0;
 
     this.width = 90;

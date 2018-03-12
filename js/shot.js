@@ -10,13 +10,15 @@ function Shot(shooter) {
     // div#shot
     this.balise_shoot;
 
+    this.width = 25;
+    this.height = 6;
     //Object.getPrototypeOf(shooter).constructor.name
 
     this.init = function () {
         this.balise_shoot = document.getElementById('shot');
         this.img_shoot = document.createElement("img");
 
-        if (Object.getPrototypeOf(shooter).constructor.name == "Enemy") {
+        if (Object.getPrototypeOf(shooter).constructor.name === "Enemy") {
             this.img_shoot.src = "./Images/Bullet2.png";
         } else {
             this.img_shoot.src = "./Images/Bullet.png";
@@ -45,7 +47,7 @@ function Shot(shooter) {
      *				else : right
      */
     this.move = function () {
-        if (Object.getPrototypeOf(shooter).constructor.name == "Enemy") {
+        if (Object.getPrototypeOf(shooter).constructor.name === "Enemy") {
             this.left();
         } else {
             this.right();
