@@ -11,6 +11,7 @@ div#playground {
     width : 100vw;
     height : 100vh;
     background-image : url("../Images/Background.png");
+    background-size: cover;
 }
 div#hp {
 	position:fixed;

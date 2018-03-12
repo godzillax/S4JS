@@ -21,6 +21,7 @@ function Player() {
     this.img;
     this.isHit = 0;
 
+    this.speed = 10;
     /**
      * Called when the game is initialised. 
      * Initiates the player
@@ -62,7 +63,7 @@ function Player() {
      */
     this.up = function () {
         if (this.coordY > -30) {
-            this.coordY = this.coordY - 10;
+            this.coordY = this.coordY - this.speed;
             this.spawn();
         }
     }
@@ -72,7 +73,7 @@ function Player() {
      */
     this.down = function () {
         if (this.coordY < window.innerHeight - 50) {
-            this.coordY = this.coordY + 10;
+            this.coordY = this.coordY + this.speed;
             this.spawn();
         }
 
