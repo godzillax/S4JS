@@ -15,6 +15,7 @@ function initGame() {
     shotArray = new Array();
 
     document.body.addEventListener("keydown", playerAction);
+    document.body.addEventListener("keyup", playerActionEnd);
     lastPressedKey = 0;
     lastShot = 0;
     playerActionCheck = 0;
@@ -41,10 +42,16 @@ function playerAction(event) {
     let k = event.keyCode;
     if (k == 32)
         lastShot = 1;
-
-    lastPressedKey = event.keyCode;
+    else
+        lastPressedKey = event.keyCode;
 }
 
+function playerActionEnd(event) {
+    if (event.keyCode == lastPressedKey)
+        lastPressedKey = 0;
+    else if (event.keyCode == 32)
+        lastShot = 0;
+}
 
 /**
  * Manages the player Actions
@@ -59,8 +66,7 @@ function makePlayerAction() {
     // Space
     if (lastShot == 1)
         player.shoot();
-    lastPressedKey = 0;
-    lastShot = 0;
+    
 }
 
 /**

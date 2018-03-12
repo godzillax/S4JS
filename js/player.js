@@ -4,17 +4,21 @@ function Player() {
     this.coordY;
     this.score = 0;
     this.hp = 5;
-    
+
+    // Shoot cadency in ms
+    this.cadency = 0.25;
+    this.lastShot = 0;
+
     this.width = 90;
     this.height = 75;
-    
+
     // Will contain the div#player
     this.balise_perso;
-    
+
     // The img html tag 
     this.img;
     this.isHit = 0;
-    
+
     /**
      * Called when the game is initialised. 
      * Initiates the player
@@ -24,10 +28,10 @@ function Player() {
         this.img = document.createElement("img");
         this.img.src = "./Images/player.png";
         this.img.style.width = "100%";
-        this.coordY = (window.innerHeight/2)-50;
+        this.coordY = (window.innerHeight / 2) - 50;
         this.spawn();
     }
-    
+
     /**
      * Places the player on the screen
      */
@@ -36,7 +40,7 @@ function Player() {
         this.balise_perso.style.top = this.coordY + "px";
         this.balise_perso.appendChild(this.img);
     }
-    
+
     /**
      * Moves the player
      * @param {type} direction :
@@ -50,28 +54,28 @@ function Player() {
             this.down();
         }
     }
-    
+
     /**
      * Moves the player up
      */
     this.up = function () {
         if (this.coordY > -30) {
-            this.coordY = this.coordY-10;
+            this.coordY = this.coordY - 10;
             this.spawn();
         }
     }
-    
-     /**
+
+    /**
      * Moves the player down
      */
     this.down = function () {
-        if (this.coordY < window.innerHeight-50) {
-            this.coordY = this.coordY+10;
+        if (this.coordY < window.innerHeight - 50) {
+            this.coordY = this.coordY + 10;
             this.spawn();
         }
-        
+
     }
-    
+
     /**
      * Creates a Shot
      * 
@@ -79,12 +83,16 @@ function Player() {
      * LE MAINLOOP DU MAIN JUSQU'A SA MORT
      */
     this.shoot = function () {
-        shot = new Shot(this);
-        shot.init();
-        shot.right();
-        shotArray.push(shot);
+        t = timestamp();
+        if (t > this.lastShot + (this.cadency * 1000)) {
+            this.lastShot = t
+            shot = new Shot(this);
+            shot.init();
+            shot.right();
+            shotArray.push(shot);
+        }
     }
-    
+
     /**
      * When the player is hit, they will lose HP and may die if their HP reaches 0
      */
@@ -97,7 +105,7 @@ function Player() {
             this.img.src = './Images/playerHit.png';
         }
     }
-    
+
     this.death = function () {
         this.img.src = '';
     }
