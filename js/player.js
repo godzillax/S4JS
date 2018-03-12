@@ -82,6 +82,7 @@ function Player() {
         shot = new Shot(this);
         shot.init();
         shot.right();
+        shotArray.push(shot);
     }
     
     /**

@@ -10,24 +10,19 @@
  */
 function initGame() {
     player = new Player();
+    player.init();
     
-    this.player.init();
+    shotArray = new Array();
 
     document.body.addEventListener("keydown", playerAction);
     lastPressedKey = 0;
+    lastShot = 0;
+    playerActionCheck = 0;
 
     fps = 60;
     lastTimeStampUpdate = 0;
-    
-    requestAnimationFrame(mainLoop);
-}
 
-/**
- * Record the last key pressed by the player to makt its action
- * @param {type} event
- */
-function playerAction(event) {
-    lastPressedKey = event.keyCode;
+    requestAnimationFrame(mainLoop);
 }
 
 /**
@@ -37,6 +32,20 @@ function playerAction(event) {
 function timestamp() {
     return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
 }
+
+/**
+ * Record the last key pressed by the player to makt its action
+ * @param {type} event
+ */
+function playerAction(event) {
+    let k = event.keyCode;
+    if (k == 32)
+        lastShot = 1;
+
+    lastPressedKey = event.keyCode;
+}
+
+
 /**
  * Manages the player Actions
  */
@@ -48,16 +57,27 @@ function makePlayerAction() {
     else if (lastPressedKey == 40 || lastPressedKey == 83)
         player.down();
     // Space
-    else if (lastPressedKey == 32)
+    if (lastShot == 1)
         player.shoot();
     lastPressedKey = 0;
+    lastShot = 0;
 }
 
+/**
+ * Manages the movement of the shots
+ * @returns {undefined}
+ */
+function manageShotMovement() {
+    for (i = 0; i < shotArray.length; i++) {
+        shotArray[i].move();
+    }
+}
 /**
  * Update the game, player and enemy position
  */
 function update() {
     makePlayerAction()
+    manageShotMovement()
 }
 
 /**

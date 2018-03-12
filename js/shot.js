@@ -4,8 +4,10 @@ function Shot(shooter) {
     this.direction;
     //this.dmg;
 
+    // Contains the <img> html tag
     this.img_shoot;
 
+    // div#shot
     this.balise_shoot;
 
     this.shot;
@@ -56,13 +58,14 @@ function Shot(shooter) {
      * The bullet goes left
      */
     this.left = function () {
+        // Surtout pas de while : Boucle qui bloque tout le programme
         if (this.coordX > 0) {
             this.coordX = this.coordX - 10;
             this.spawn();
         }
-        // else {
-        // 	this.death();
-        // }
+        else {
+         	this.death();
+        }
     }
 
     /**
@@ -73,9 +76,9 @@ function Shot(shooter) {
             this.coordX = this.coordX + 10;
             this.spawn();
         }
-        // else {
-        // 	this.death();
-        // }
+        else {
+         	this.death();
+        }
     }
 
     /**
@@ -93,6 +96,10 @@ function Shot(shooter) {
      * The bullet is out of the window
      */
     this.death = function () {
-        this.img_shoot.src = "";
+        //this.img_shoot.src = "";
+        // On supprime le shot
+        this.balise_shoot.removeChild(this.img_shoot)
+        // On le supprime du tableau global
+        shotArray.splice(shotArray.indexOf(this), 1);
     }
 }
