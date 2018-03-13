@@ -9,6 +9,9 @@ function Shot(shooter) {
 
     // div#shot
     this.balise_shoot;
+    
+    this.audio;
+    this.balAudio;
 
     this.width = 25;
     this.height = 6;
@@ -30,6 +33,7 @@ function Shot(shooter) {
         this.coordY = shooter.coordY + shooter.height/2;
         this.balise_shoot.appendChild(this.img_shoot);
         
+        this.startAudio()
         this.spawn();
     }
 
@@ -100,6 +104,16 @@ function Shot(shooter) {
         // On supprime le shot
         this.balise_shoot.removeChild(this.img_shoot)
         // On le supprime du tableau global
+        this.balAudio.removeChild(this.audio)
         shotArray.splice(shotArray.indexOf(this), 1);
+    }
+    
+    this.startAudio = function () {
+        this.balAudio = document.getElementById("audio")
+        this.audio = document.createElement("audio");
+        this.audio.src = "./son/piou.mp3"
+        this.balAudio.appendChild(this.audio);
+        this.audio.play();
+        
     }
 }

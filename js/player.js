@@ -112,4 +112,6 @@ function Player() {
     this.death = function () {
         this.img.src = '';
     }
+    
+    
 }

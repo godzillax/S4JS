@@ -11,8 +11,15 @@
 function initGame() {
     player = new Player();
     player.init();
-    
+
     shotArray = new Array();
+
+    balAudio = document.getElementById("audio")
+    mainMusic = document.createElement("audio");
+    mainMusic.src = "./son/bensound-summer.mp3"
+    balAudio.appendChild(mainMusic);
+    mainMusic.loop = "true"
+    mainMusic.play();
 
     document.body.addEventListener("keydown", playerAction);
     document.body.addEventListener("keyup", playerActionEnd);
@@ -70,7 +77,7 @@ function makePlayerAction() {
     // Space
     if (lastShot == 1)
         player.shoot();
-    
+
 }
 
 /**
