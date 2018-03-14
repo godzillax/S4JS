@@ -9,28 +9,44 @@
  * Called when the page loads. It will initiates all the elements, then launch the game
  */
 function initGame() {
+    init_player()
+    init_shots()
+    init_mainMusic()
+    init_playerControll()
+    init_mainLoopManagement()
+
+    requestAnimationFrame(mainLoop);
+}
+
+function init_player() {
     player = new Player();
     player.init();
+}
 
+function init_shots() {
     shotArray = new Array();
+}
 
+function init_mainMusic() {
     balAudio = document.getElementById("audio")
     mainMusic = document.createElement("audio");
     mainMusic.src = "./son/bensound-summer.mp3"
     balAudio.appendChild(mainMusic);
     mainMusic.loop = "true"
     mainMusic.play();
+}
 
+function init_playerControll() {
     document.body.addEventListener("keydown", playerAction);
     document.body.addEventListener("keyup", playerActionEnd);
     lastPressedKey = 0;
     lastShot = 0;
     playerActionCheck = 0;
+}
 
+function init_mainLoopManagement() {
     fps = 60;
     lastTimeStampUpdate = 0;
-
-    requestAnimationFrame(mainLoop);
 }
 
 /**
