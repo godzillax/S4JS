@@ -42,7 +42,7 @@ function EnemyGroup(nbEnemies, pattern) {
             y = Math.floor(Math.random() * window.innerHeight);
             x = x + 50;
 
-            this.arrayEnemies[i] = new Enemy(x, y, 1, 5 + Math.random() * 5, 90, 75, 1, 15, this.balGrp);
+            this.arrayEnemies[i] = new Enemy(x, y, 1, 5 + Math.floor(Math.random()*10), 90, 75, 1, 15, this.balGrp);
             this.arrayEnemies[i].init();
         }
     }
@@ -54,8 +54,7 @@ function EnemyGroup(nbEnemies, pattern) {
     }
 
     this.move = function () {
-        if (this.pattern == 1)
-            this.move1();
+        eval("this.move" + this.pattern + "()");
     }
     
 
@@ -72,8 +71,8 @@ function EnemyGroup(nbEnemies, pattern) {
     }
 
     this.manage = function () {
-        this.manageDeath();
         this.move();
+        this.manageDeath();
         if (this.arrayEnemies.length == 0) {
             enemiesArray.splice(enemiesArray.indexOf(this), 1);
         }

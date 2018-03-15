@@ -44,7 +44,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     }
 
     this.updatePosition = function () {
-        if (this.coordX < 0-this.width) {
+        if (this.coordX < -this.width) {
             this.death();
         } else {
             if (!div) {
@@ -176,7 +176,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
         if (this.coordX < window.innerWidth && this.coordY < window.innerHeight) {
             if (this.pace != -1) {
                 t = timestamp();
-                if (t > this.lastShot + (this.pace * 1000)) {
+                if (t > this.lastShot + this.pace) {
                     this.lastShot = t;
                     shot = new Shot(this);
                     shot.init();

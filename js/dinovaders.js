@@ -33,13 +33,14 @@ function init_player() {
  * @param {type} nbgroups
  */
 function init_Enemies(nbEnemies, nbgroups) {
+    document.getElementById('enemy').innerHTML = "";
     enemiesArray = new Array();
     if (nbgroups && nbEnemies) {
 
     } else {
-        r = Math.random()*wave*10
-        if (r<wave*3)
-            enemiesArray.push(new EnemyGroup(wave*3, Math.floor(Math.random() * 1)));
+        r = Math.floor(Math.random() * wave * 10)
+        if (r < wave * 3)
+            enemiesArray.push(new EnemyGroup(wave * 3, Math.floor(Math.random() * 1)));
         else
             enemiesArray.push(new EnemyGroup(r, Math.floor(Math.random() * 1)));
         enemiesArray[0].init();
