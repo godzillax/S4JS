@@ -8,6 +8,8 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
     this.pace;
     this.points;
     this.image;
+    this.lastShot = 0;
+
     
         
     this.init= function(){
@@ -22,7 +24,8 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
         
         this.image = document.createElement("img");
         this.image.top = this.coordY;
-        this.image.left = this.coordX;      
+        this.image.left = this.coordX;
+        this.image.style.position = "fixed";
         if (!imgsrc){
             this.image.src = "./Images/Drone.png";
         }
@@ -137,13 +140,22 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
     
     this.death= function(){
         div.removeChild(this.image);
+        this.addScore();
     }
     
     this.shoot= function(){
-        if (this.pace == -1){
-            
+        if (this.coordX<window.innerWidth && this.coordY<window.innerHeight){    
+            if (this.pace != -1){
+                t = timestamp();
+                if (t > this.lastShot + (this.pace * 1000)) {
+                    this.lastShot = t;
+                    shot = new Shot(this);
+                    shot.init();
+                    shot.right();
+                    shotArray.push(shot);
+                }
+            }
         }
-        //pas qu'ils tirent s'ils sont en dehors de l'écran
     }
     
     this.addScore= function(){
