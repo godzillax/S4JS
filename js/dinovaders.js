@@ -33,6 +33,7 @@ function init_mainMusic() {
     mainMusic.src = "./son/bensound-summer.mp3"
     balAudio.appendChild(mainMusic);
     mainMusic.loop = "true"
+    mainMusic.volume = 0.15
     mainMusic.play();
 }
 
@@ -84,13 +85,17 @@ function playerActionEnd(event) {
  * Manages the player Actions
  */
 function makePlayerAction() {
-    // Up or Z
+    // 'Up' or 'Z'
     if (lastPressedKey == 38 || lastPressedKey == 90)
         player.up();
-    // Down or S 
+    // 'Down' or 'S' 
     else if (lastPressedKey == 40 || lastPressedKey == 83)
         player.down();
-    // Space
+    // If the window is resized, the dino may be out of the map, this function prevents it
+    else
+        player.checkOutMap();
+
+    // 'Space'
     if (lastShot == 1)
         player.shoot();
 

@@ -66,6 +66,7 @@ function Player() {
             this.coordY = this.coordY - this.speed;
             this.spawn();
         }
+
     }
 
     /**
@@ -76,14 +77,25 @@ function Player() {
             this.coordY = this.coordY + this.speed;
             this.spawn();
         }
+    }
 
+	/**
+	* Replace the player on the visible screen.
+	* If the window is resized, the dino may be out of the map, this function prevents it
+	*/
+    this.checkOutMap = function() {
+    	if (this.coordY < -30) {
+    		this.coordY = -30;
+    		this.spawn();
+    	}
+    	else if (this.coordY>window.innerHeight - 50){
+    		this.coordY = window.innerHeight - 50
+    		this.spawn();
+    	}
     }
 
     /**
-     * Creates a Shot
-     * 
-     * A AJOUTER DANS UN TABLEAU DANS LE MAIN, LE DEPLACEMENT DE LA BALLE SE FAIT DANS
-     * LE MAINLOOP DU MAIN JUSQU'A SA MORT
+     * Creates a Shot and add it in the global array shotArray
      */
     this.shoot = function () {
         t = timestamp();
