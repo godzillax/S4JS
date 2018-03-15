@@ -42,12 +42,12 @@ function EnemyGroup(nbEnemies, pattern) {
             y = Math.floor(Math.random() * window.innerHeight);
             x = x + 50;
 
-            this.arrayEnemies[i] = new Enemy(x, y, 1, 5 + Math.floor(Math.random()*10), 90, 75, 1, 15, this.balGrp);
+            this.arrayEnemies[i] = new Enemy(x, y, 1, 5 + Math.floor(Math.random() * 10), 90, 75, 1, 15, this.balGrp);
             this.arrayEnemies[i].init();
         }
     }
-    
-    this.move1 = function() {
+// 5 + Math.floor(Math.random() * 10)
+    this.move1 = function () {
         for (i = 0; i < this.arrayEnemies.length; i++) {
             this.arrayEnemies[i].move(0);
         }
@@ -56,7 +56,7 @@ function EnemyGroup(nbEnemies, pattern) {
     this.move = function () {
         eval("this.move" + this.pattern + "()");
     }
-    
+
 
     this.manageDeath = function () {
         let tab = new Array();
@@ -65,8 +65,11 @@ function EnemyGroup(nbEnemies, pattern) {
                 tab.push(i)
             }
         }
-        for (i = 0; i < tab.length; i++) {
-            this.arrayEnemies.splice(tab[i], 1);
+
+        if (tab.length > 0) {
+            for (i = tab.length-1; i >= 0; i--) {
+                this.arrayEnemies.splice(tab[i], 1);
+            }
         }
     }
 
