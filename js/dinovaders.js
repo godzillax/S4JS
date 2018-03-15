@@ -33,7 +33,7 @@ function init_player() {
  * @param {type} nbgroups
  */
 function init_Enemies(nbEnemies, nbgroups) {
-    //document.getElementById('enemy').innerHTML = "";
+    document.getElementById('enemy').innerHTML = "";
     enemiesArray = new Array();
     if (nbgroups && nbEnemies) {
 

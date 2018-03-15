@@ -40,7 +40,7 @@ function EnemyGroup(nbEnemies, pattern) {
 
         for (i = 0; i < this.nbEnemies; i++) {
             y = Math.floor(Math.random() * window.innerHeight);
-            x = x + 50;
+            x = x + 50 + Math.floor(Math.random() * 100);
 
             this.arrayEnemies[i] = new Enemy(x, y, 1, 5 + Math.floor(Math.random() * 10), 90, 75, (4 + Math.random() * 16), 15, this.balGrp);
             this.arrayEnemies[i].init();
