@@ -21,10 +21,12 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
         this.height = h;
         this.pace = cadency;
         this.points = pts;
-        
+        console.log("x : " +this.coordX)
+        console.log("y : " +this.coordY)
         this.image = document.createElement("img");
-        this.image.style.top = this.coordY+"px";
-        this.image.style.left = this.coordX+"px";
+        this.image.style.top = this.coordX+"px";
+        this.image.style.left = this.coordY+"px";
+      
         this.image.style.position = "fixed";
         if (!imgsrc){
             this.image.src = "./Images/Drone.png";
@@ -32,6 +34,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
         else this.image.src = this.imagesrc;
         this.image.style.position = "fixed";
         this.image.style.width = this.width+"px";
+        this.speed = 1;
         this.spawn();
     }
     
