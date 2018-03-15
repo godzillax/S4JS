@@ -100,7 +100,6 @@ function Shot(shooter) {
      * The bullet is out of the window
      */
     this.death = function () {
-        //this.img_shoot.src = "";
         // On supprime le shot
         this.balise_shoot.removeChild(this.img_shoot)
         // On le supprime du tableau global

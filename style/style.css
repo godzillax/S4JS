@@ -15,8 +15,8 @@ div#playground {
 }
 div#hp {
 	position:fixed;
-	width : 200px;
-	height: 30px;
+	width : 80%;
+	height: 50px;
 	left : 1%;
 }
 
