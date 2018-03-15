@@ -43,13 +43,18 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
     }
     
     this.updatePosition = function(){
-        if (!div) {
-            document.getElementById("enemy").removeChild(this.image)
+        if(this.coordY<0){
+            this.death();
         }
-        div.removeChild(this.image);
-        this.image.top = this.coordY+"px";
-        this.image.left = this.coordX+"px";
-        this.spawn();
+        else {
+            if (!div) {
+                document.getElementById("enemy").removeChild(this.image)
+            }
+            div.removeChild(this.image);
+            this.image.top = this.coordY+"px";
+            this.image.left = this.coordX+"px";
+            this.spawn();
+        }
     }
     /**
      * 
