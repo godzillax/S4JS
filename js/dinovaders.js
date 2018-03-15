@@ -9,8 +9,10 @@
  * Called when the page loads. It will initiates all the elements, then launch the game
  */
 function initGame() {
+    init_wave() 
     init_player()
     init_shots()
+    init_Enemies() 
     init_mainMusic()
     init_playerControll()
     init_mainLoopManagement()
@@ -22,6 +24,11 @@ function initGame() {
 function init_player() {
     player = new Player();
     player.init();
+}
+
+function init_Enemies() {
+    EnemiesArray = new Array();
+    EnemiesArray[0] = new EnemyGroup(10);
 }
 
 function init_shots() {
@@ -49,6 +56,10 @@ function init_playerControll() {
 function init_mainLoopManagement() {
     fps = 60;
     lastTimeStampUpdate = 0;
+}
+
+function init_wave () {
+    wave = 1;
 }
 
 /**
@@ -130,12 +141,23 @@ function manageShotMovement() {
     }
 }
 
+function manageEnemies() {
+    if (enemiesArray.length == 0) {
+        wave++;
+        enemiesArray[0].push(new EnemyGroup(10 * wave))
+    }
+    for (i = 0; i<EnemiesArray.length; i++) {
+        
+    }
+}
+
 /**
  * Update the game, player and enemy position
  */
 function update() {
     makePlayerAction()
     manageShotMovement()
+    manageEnemies()
 }
 
 /**

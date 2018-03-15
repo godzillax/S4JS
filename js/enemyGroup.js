@@ -45,4 +45,21 @@ function EnemyGroup(nbEnemies, pattern) {
             this.arrayEnemies[i].move(0);
         }
     }
+    
+    this.manageDeath = function () {
+        let tab = new Array();
+        for (i = 0; i<this.arrayEnemies.length; i++) {
+            if (this.arrayEnemies[i].health == 0) {
+                tab.push(i)
+            }
+        }
+        for (i = 0; i<tab.length; i++) {
+            this.arrayEnemies.splice(tab[i], 1);
+        }
+    }
+    
+    this.manage = function() {
+        this.manageDeath();
+        this.move();
+    }
 }
