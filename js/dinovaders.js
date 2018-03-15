@@ -129,7 +129,6 @@ function makePlayerAction() {
     // 'Space'
     if (lastShot == 1)
         player.shoot();
-
 }
 
 /**
@@ -145,6 +144,20 @@ function manageShot() {
         shotArray[i].move();
     }
 }
+
+//Marche pas au niveau de la giant boucle
+function manageShot() {
+    for (i = 0; i < shotArray.length; i++) {
+        for (j = 0; j < enemiesArray.length; j++) {
+            for (k = 0; k < enemiesArray[j].length; k++ ) {
+                shotArray[i].hit(enemiesArray[j].arrayEnnemies[k]);
+            }
+        }
+        shotArray[i].hit(player);
+        shotArray[i].move();
+    }
+}
+
 
 function manageEnemies() {
     if (enemiesArray.length == 0) {

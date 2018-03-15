@@ -102,18 +102,21 @@ function Shot(shooter) {
      * @returns if this hit obj
      */
     this.hit = function (obj) {
-        var col = false
-        if (Object.getPrototypeOf(shooter).constructor.name === "Enemy") {
+        var col = false;
+        
+        console.log(Object.getPrototypeOf(obj).constructor.name);
+
+        if (Object.getPrototypeOf(obj).constructor.name === "Enemy") {
             if (this.coordX >= obj.coordX){
                  if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
-                     col = true;
+                    col = true;
                  }
                  if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
-                     col = true;
+                    col = true;
                  }
             }
         }
-        else if (Object.getPrototypeOf(shooter).constructor.name === "Player") {
+        else if (Object.getPrototypeOf(obj).constructor.name === "Player") {
             if (this.coordX <= obj.coordX + obj.width){
                  if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
                      col = true;
