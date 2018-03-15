@@ -31,16 +31,16 @@ function EnemyGroup(nbEnemies, pattern) {
      * and go straight to the left. They can shoot.
      */
     this.spawnPattern1 = function() {
-        let y = window.innerWidth + 50;
-        let x;
+        let x = window.innerWidth + 50;
+        let y;
         
         balEnemy = document.getElementById('enemy');
         this.balGrp = document.createElement("div");
         balEnemy.appendChild(this.balGrp);
         
         for (i = 0; i<this.nbEnemies; i++) {
-            x = Math.floor(Math.random() * window.innerHeight);
-            y = y + 50;
+            y = Math.floor(Math.random() * window.innerHeight);
+            x = x + 50;
             
             this.arrayEnemies[i] = new Enemy(x, y, 1, 10, 90, 75, 1, 15, this.balGrp);
             this.arrayEnemies[i].init();
