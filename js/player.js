@@ -117,14 +117,16 @@ function Player() {
      * When the player is hit, they will lose HP and may die if their HP reaches 0
      */
     this.hit = function () {
-        this.isHit = 1;
-        this.hp--;
-        this.lastBlink = -500;
-        this.blinker = 6;
-        if (this.hp <= 0) {
-            this.explode();
-        } else {
-            this.blink();
+        if (!this.isHit) {
+            this.isHit = 1;
+            this.hp--;
+            this.lastBlink = -500;
+            this.blinker = 6;
+            if (this.hp <= 0) {
+                this.explode();
+            } else {
+                this.blink();
+            }
         }
         // updateHealthBar(this);
     }
@@ -143,21 +145,12 @@ function Player() {
             }
             
         }
-        if (this.blinker <= -1)
+        if (this.blinker <= -1) {
             this.img.src = "./Images/player.png";
+            this.isHit = 0;
+        }
 
     }
-
-
-    // this.blinkOnHit = function() {
-    //     this.img.src = "./Images/playerHit.png";
-    //     myvar = window.setTimeout(this.blinkOnHit2(), 1000);
-    // }
-
-    // this.blinkOnHit2 = function() {
-    //     this.img.src = "./Images/player.png";
-    //     window.setTimeout(this.blinkOnHit(), 1000);
-    // }
 
     this.explode = function() {
         this.startAudio();
