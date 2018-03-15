@@ -23,8 +23,8 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
         this.points = pts;
         
         this.image = document.createElement("img");
-        this.image.top = this.coordY;
-        this.image.left = this.coordX;
+        this.image.top = this.coordY+"px";
+        this.image.left = this.coordX+"px";
         this.image.style.position = "fixed";
         if (!imgsrc){
             this.image.src = "./Images/Drone.png";
@@ -41,6 +41,16 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
         }
         div.appendChild(this.image);
     }
+    
+    this.updatePosition = function(){
+        if (!div) {
+            document.getElementById("enemy").removeChild(this.image)
+        }
+        div.removeChild(this.image);
+        this.image.top = this.coordY+"px";
+        this.image.left = this.coordX+"px";
+        this.spawn();
+    }
     /**
      * 
      * @param entier entre 0 et 7 indiquant la direction a
@@ -49,31 +59,39 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
         switch(a){
             case 0 : 
                 this.moveLeft();
+                this.updatePosition();
                 break;
             case 1 : 
                 this.moveLeft();
                 this.moveUp();
+                this.updatePosition();
                 break;
             case 2 : 
                 this.moveUp();
+                this.updatePosition();
                 break;
             case 3 : 
                 this.moveUp();
                 this.moveRight();
+                this.updatePosition();
                 break;
             case 4 : 
                 this.moveRight();
+                this.updatePosition();
                 break;
             case 5 : 
                 this.moveRight();
                 this.moveDown();
+                this.updatePosition();
                 break;
             case 6 : 
                 this.MoveDown();
+                this.updatePosition();
                 break;
             case 7 : 
                 this.moveDown();
                 this.moveLeft();
+                this.updatePosition();
                 break;
         }
     }
