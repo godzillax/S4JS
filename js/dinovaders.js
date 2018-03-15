@@ -14,6 +14,7 @@ function initGame() {
     init_mainMusic()
     init_playerControll()
     init_mainLoopManagement()
+    updateHealthBar(player);
 
     requestAnimationFrame(mainLoop);
 }
@@ -28,7 +29,7 @@ function init_shots() {
 }
 
 function init_mainMusic() {
-    balAudio = document.getElementById("audio")
+    balAudio = document.getElementById("audio");
     mainMusic = document.createElement("audio");
     mainMusic.src = "./son/bensound-summer.mp3"
     balAudio.appendChild(mainMusic);
@@ -48,6 +49,23 @@ function init_playerControll() {
 function init_mainLoopManagement() {
     fps = 60;
     lastTimeStampUpdate = 0;
+}
+
+/**
+ * Init the health bar depending of the player's hp
+ * @param Player p
+ */
+function updateHealthBar(p) {
+    healthBar = document.getElementById("hp");
+    healthBar.innerHTML = "";
+    for (i=0; i<p.hp; i++) {
+        let h = document.createElement("img");
+        h.src = "./Images/life.png";
+        h.style.height = "100%"
+        healthBar.appendChild(h);
+                
+    }
+    
 }
 
 /**
@@ -81,6 +99,7 @@ function playerActionEnd(event) {
         lastShot = 0;
 }
 
+
 /**
  * Manages the player Actions
  */
@@ -110,6 +129,7 @@ function manageShotMovement() {
         shotArray[i].move();
     }
 }
+
 /**
  * Update the game, player and enemy position
  */
