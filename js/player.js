@@ -5,6 +5,9 @@ function Player() {
     this.score = 0;
     this.hp = 5;
 
+    this.audio;
+    this.playerAudio;
+
     // Shoot cadency in ms
     this.cadency = 0.33;
     
@@ -92,6 +95,8 @@ function Player() {
     		this.coordY = window.innerHeight - 50
     		this.spawn();
     	}
+        if (this.blinker > -1)
+            this.blink();
     }
 
     /**
@@ -112,19 +117,60 @@ function Player() {
      * When the player is hit, they will lose HP and may die if their HP reaches 0
      */
     this.hit = function () {
-        this.isHit = 1;
-        this.hp--;
-        if (this.hp <= 0) {
-            this.death();
-        } else {
-            this.img.src = './Images/playerHit.png';
+        if (!this.isHit) {
+            this.isHit = 1;
+            this.hp--;
+            this.lastBlink = -500;
+            this.blinker = 6;
+            if (this.hp <= 0) {
+                this.explode();
+            } else {
+                this.blink();
+            }
         }
         updateHealthBar(this);
     }
 
+    this.blink = function() {
+        this.t = timestamp();
+        if (this.t > (this.lastBlink+500)){
+            this.lastBlink = this.t;
+           
+            if(this.blinker%2==0) {
+                this.img.src = "./Images/playerHit.png";
+                this.blinker-=1;
+            } else if (this.blinker%2==1)  {
+                this.img.src = "./Images/player.png";
+                this.blinker-=1;
+            }
+            
+        }
+
+        if (this.blinker <= -1) {
+            this.img.src = "./Images/player.png";
+            this.isHit = 0;
+        }
+
+    }
+
+    this.explode = function() {
+        this.startAudio();
+        this.death();
+
+       
+    }
+
     this.death = function () {
-        this.img.src = '';
+        this.balise_perso.removeChild(this.img);
+        this.playerAudio.removeChild(this.audio);
     }
     
+    this.startAudio = function() {
+        this.playerAudio = document.getElementById("audio");
+        this.audio = document.createElement("audio");
+        this.audio.src = "./son/atari_boom.wav";
+        this.playerAudio.appendChild(this.audio);
+        this.audio.play();
+    }
     
 }
