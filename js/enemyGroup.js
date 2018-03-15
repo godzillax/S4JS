@@ -42,7 +42,7 @@ function EnemyGroup(nbEnemies, pattern) {
             y = Math.floor(Math.random() * window.innerHeight);
             x = x + 50;
             
-            this.arrayEnemies[i] = new Enemy(x, y, 1, 10, 90, 75, 1, 15, this.balGrp);
+            this.arrayEnemies[i] = new Enemy(x, y, 1, 5, 90, 75, 1, 15, this.balGrp);
             this.arrayEnemies[i].init();
         }
     }
