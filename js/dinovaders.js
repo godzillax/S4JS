@@ -31,7 +31,11 @@ function init_Enemies(nbEnemies, nbgroups) {
     if (nbgroups && nbEnemies) {
 
     } else {
-        enemiesArray.push(new EnemyGroup(10 * wave, Math.floor(Math.random() * 1)));
+        r = Math.random()*wave*10
+        if (r<wave*3)
+            enemiesArray.push(new EnemyGroup(wave*3, Math.floor(Math.random() * 1)));
+        else
+            enemiesArray.push(new EnemyGroup(r, Math.floor(Math.random() * 1)));
         enemiesArray[0].init();
     }
 }
