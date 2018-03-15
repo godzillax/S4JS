@@ -95,6 +95,8 @@ function Player() {
     		this.coordY = window.innerHeight - 50
     		this.spawn();
     	}
+        if (this.blinker > -1)
+            this.blink();
     }
 
     /**
@@ -117,6 +119,8 @@ function Player() {
     this.hit = function () {
         this.isHit = 1;
         this.hp--;
+        this.lastBlink = -500;
+        this.blinker = 6;
         if (this.hp <= 0) {
             this.explode();
         } else {
@@ -126,17 +130,24 @@ function Player() {
     }
 
     this.blink = function() {
-        var blink = 1;
-        window.setInterval(function() {
-            if(blink == 1) {
+        this.t = timestamp();
+        if (this.t > (this.lastBlink+500)){
+            this.lastBlink = this.t;
+           
+            if(this.blinker%2==0) {
                 this.img.src = "./Images/playerHit.png";
-                blink-=1;
-            } else {
+                this.blinker-=1;
+            } else if (this.blinker%2==1)  {
                 this.img.src = "./Images/player.png";
-                blink+=1;
+                this.blinker-=1;
             }
-        }, 1000);
+            
+        }
+        if (this.blinker <= -1)
+            this.img.src = "./Images/player.png";
+
     }
+
 
     // this.blinkOnHit = function() {
     //     this.img.src = "./Images/playerHit.png";
