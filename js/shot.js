@@ -1,8 +1,9 @@
-function Shot(shooter) {
+function Shot(shooter, speed) {
     this.coordX;
     this.coordY;
     this.direction;
     //this.dmg;
+    this.speed = 10;
 
     // Contains the <img> html tag
     this.img_shoot;
@@ -20,18 +21,26 @@ function Shot(shooter) {
     this.init = function () {
         this.balise_shoot = document.getElementById('shot');
         this.img_shoot = document.createElement("img");
+        
 
         if (Object.getPrototypeOf(shooter).constructor.name === "Enemy") {
             this.img_shoot.src = "./Images/Bullet2.png";
+            this.coordX = shooter.coordX;
+            this.coordY = shooter.coordY + shooter.height/2;
         } else {
             this.img_shoot.src = "./Images/Bullet.png";
+            this.coordX = shooter.coordX + shooter.width;
+            this.coordY = shooter.coordY + shooter.height/2;
         }
         this.img_shoot.style.width = "25px";
         this.img_shoot.style.position = "fixed";
 
-        this.coordX = shooter.coordX + shooter.width;
-        this.coordY = shooter.coordY + shooter.height/2;
+        
         this.balise_shoot.appendChild(this.img_shoot);
+        
+        if (speed) {
+            this.speed = speed + (5 + Math.random() * 10);
+        }
         
         this.startAudio()
         this.spawn();
@@ -64,7 +73,7 @@ function Shot(shooter) {
     this.left = function () {
         // Surtout pas de while : Boucle qui bloque tout le programme
         if (this.coordX > 0) {
-            this.coordX = this.coordX - 10;
+            this.coordX = this.coordX - this.speed;
             this.spawn();
         }
         else {
@@ -77,7 +86,7 @@ function Shot(shooter) {
      */
     this.right = function () {
         if (this.coordX < window.innerWidth) {
-            this.coordX = this.coordX + 10;
+            this.coordX = this.coordX + this.speed;
             this.spawn();
         }
         else {
@@ -102,7 +111,7 @@ function Shot(shooter) {
      */
     this.death = function () {
         // On supprime le shot
-        this.balise_shoot.removeChild(this.img_shoot)
+        this.img_shoot.parentNode.removeChild(this.img_shoot)
         // On le supprime du tableau global
         this.balAudio.removeChild(this.audio)
         shotArray.splice(shotArray.indexOf(this), 1);

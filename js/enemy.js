@@ -32,7 +32,6 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
             this.image.src = this.imagesrc;
         this.image.style.position = "fixed";
         this.image.style.width = this.width + "px";
-        this.speed = 1;
         this.spawn();
     }
 
@@ -103,19 +102,19 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     }
 
     this.moveUp = function () {
-        this.coordY += speed;
+        this.coordY += this.speed;
     }
 
     this.moveDown = function () {
-        this.coordY -= speed;
+        this.coordY -= this.speed;
     }
 
     this.moveLeft = function () {
-        this.coordX -= speed;
+        this.coordX -= this.speed;
     }
 
     this.moveRight = function () {
-        this.coordX += speed;
+        this.coordX += this.speed;
     }
 
     /**
@@ -173,14 +172,14 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     }
 
     this.shoot = function () {
-        if (this.coordX < window.innerWidth && this.coordY < window.innerHeight) {
+        if (this.coordX < window.innerWidth && this.coordY < window.innerHeight && this.coordX>0 && this.coordY >0) {
             if (this.pace != -1) {
                 t = timestamp();
-                if (t > this.lastShot + this.pace) {
+                if (t > this.lastShot + this.pace*1000) {
                     this.lastShot = t;
-                    shot = new Shot(this);
+                    shot = new Shot(this, this.speed);
                     shot.init();
-                    shot.right();
+                    shot.left();
                     shotArray.push(shot);
                 }
             }
