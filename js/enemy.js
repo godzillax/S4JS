@@ -1,4 +1,4 @@
-function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
+function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     this.coordX;
     this.coordY;
     this.health;
@@ -10,9 +10,9 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
     this.image;
     this.lastShot = 0;
 
-    
-        
-    this.init= function(){
+
+
+    this.init = function () {
         this.coordX = x;
         this.coordY = y;
         this.health = hp;
@@ -21,158 +21,160 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
         this.height = h;
         this.pace = cadency;
         this.points = pts;
-        console.log("x : " +this.coordX)
-        console.log("y : " +this.coordY)
         this.image = document.createElement("img");
-        this.image.style.top = this.coordX+"px";
-        this.image.style.left = this.coordY+"px";
-      
+        this.image.style.top = this.coordX + "px";
+        this.image.style.left = this.coordY + "px";
+
         this.image.style.position = "fixed";
-        if (!imgsrc){
+        if (!imgsrc) {
             this.image.src = "./Images/Drone.png";
-        }
-        else this.image.src = this.imagesrc;
+        } else
+            this.image.src = this.imagesrc;
         this.image.style.position = "fixed";
-        this.image.style.width = this.width+"px";
+        this.image.style.width = this.width + "px";
         this.speed = 1;
         this.spawn();
     }
-    
-    this.spawn= function(){
+
+    this.spawn = function () {
         if (!div) {
             document.getElementById("enemy").appendChild(this.image)
-        }
-        div.appendChild(this.image);
+        } else
+            div.appendChild(this.image);
     }
-    
-    this.updatePosition = function(){
-        if(this.coordY<0){
+
+    this.updatePosition = function () {
+        if (this.coordX < 0-this.width) {
             this.death();
-        }
-        else {
+        } else {
             if (!div) {
                 document.getElementById("enemy").removeChild(this.image)
+            } else {
+                div.removeChild(this.image);
+                this.image.style.top = this.coordY + "px";
+                this.image.style.left = this.coordX + "px";
+                this.spawn();
             }
-            div.removeChild(this.image);
-            this.image.style.top = this.coordY+"px";
-            this.image.style.left = this.coordX+"px";
-            this.spawn();
         }
     }
     /**
      * 
      * @param entier entre 0 et 7 indiquant la direction a
      */
-    this.move = function(a){
-        switch(a){
-            case 0 : 
+    this.move = function (a) {
+        switch (a) {
+            case 0 :
                 this.moveLeft();
                 this.updatePosition();
                 break;
-            case 1 : 
+            case 1 :
                 this.moveLeft();
                 this.moveUp();
                 this.updatePosition();
                 break;
-            case 2 : 
+            case 2 :
                 this.moveUp();
                 this.updatePosition();
                 break;
-            case 3 : 
+            case 3 :
                 this.moveUp();
                 this.moveRight();
                 this.updatePosition();
                 break;
-            case 4 : 
+            case 4 :
                 this.moveRight();
                 this.updatePosition();
                 break;
-            case 5 : 
+            case 5 :
                 this.moveRight();
                 this.moveDown();
                 this.updatePosition();
                 break;
-            case 6 : 
+            case 6 :
                 this.MoveDown();
                 this.updatePosition();
                 break;
-            case 7 : 
+            case 7 :
                 this.moveDown();
                 this.moveLeft();
                 this.updatePosition();
                 break;
         }
     }
-    
-    this.moveUp= function(){
+
+    this.moveUp = function () {
         this.coordY += speed;
     }
-    
-    this.moveDown= function(){
+
+    this.moveDown = function () {
         this.coordY -= speed;
     }
-    
-    this.moveLeft= function(){
+
+    this.moveLeft = function () {
         this.coordX -= speed;
     }
-    
-    this.moveRight= function(){
+
+    this.moveRight = function () {
         this.coordX += speed;
     }
-    
+
     /**
      * 
      * @param player or shot obj
      */
-    this.collision = function(obj){
+    this.collision = function (obj) {
         var col = false;
-         if (this.coordX <= obj.coordX + obj.width){
-             if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
-                 col = true;
-             }
-             if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
-                 col = true;
-             }
-         }
-         if (col) {
-             obj.hit();
-             this.hit();
-         }
-         return col;
+        if (this.coordX <= obj.coordX + obj.width) {
+            if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
+                col = true;
+            }
+            if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
+                col = true;
+            }
+        }
+        if (col) {
+            obj.hit();
+            this.hit();
+        }
+        return col;
     }
-    
-    this.collisionPlayer= function(){
+
+    this.collisionPlayer = function () {
         var col = false;
-         if (this.coordX <= player.coordX + player.width){
-             if ((this.coordY < player.coordY) && (this.coordY + this.height > player.coordY)) {
-                 col = true;
-             }
-             if ((this.coordY > player.coordY) && (this.coordY < player.coordY + player.height)) {
-                 col = true;
-             }
-         }
-         if (col) {
-             player.hit();
-             this.hit();
-         }
-         return col;
+        if (this.coordX <= player.coordX + player.width) {
+            if ((this.coordY < player.coordY) && (this.coordY + this.height > player.coordY)) {
+                col = true;
+            }
+            if ((this.coordY > player.coordY) && (this.coordY < player.coordY + player.height)) {
+                col = true;
+            }
+        }
+        if (col) {
+            player.hit();
+            this.hit();
+        }
+        return col;
     }
-    
-    this.hit= function(){
-        this.health --;
-        if (this.health === 0){
+
+    this.hit = function () {
+        this.health--;
+        if (this.health === 0) {
             this.death;
         }
     }
-    
-    this.death= function(){
-        div.removeChild(this.image);
-        this.addScore();
+
+    this.death = function () {
+        if (!this.removed) {
+            this.health = 0;
+            this.removed = 1;
+            div.removeChild(this.image);
+            this.addScore();
+        }
     }
-    
-    this.shoot= function(){
-        if (this.coordX<window.innerWidth && this.coordY<window.innerHeight){    
-            if (this.pace != -1){
+
+    this.shoot = function () {
+        if (this.coordX < window.innerWidth && this.coordY < window.innerHeight) {
+            if (this.pace != -1) {
                 t = timestamp();
                 if (t > this.lastShot + (this.pace * 1000)) {
                     this.lastShot = t;
@@ -184,8 +186,8 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
             }
         }
     }
-    
-    this.addScore= function(){
+
+    this.addScore = function () {
         player.score += this.points;
     }
 }

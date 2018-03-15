@@ -9,10 +9,10 @@
  * Called when the page loads. It will initiates all the elements, then launch the game
  */
 function initGame() {
-    init_wave() 
+    init_wave()
     init_player()
     init_shots()
-    init_Enemies() 
+    init_Enemies()
     init_mainMusic()
     init_playerControll()
     init_mainLoopManagement()
@@ -26,10 +26,14 @@ function init_player() {
     player.init();
 }
 
-function init_Enemies() {
+function init_Enemies(nbEnemies, nbgroups) {
     enemiesArray = new Array();
-    enemiesArray[0] = new EnemyGroup(10,1);
-    enemiesArray[0].init();
+    if (nbgroups && nbEnemies) {
+
+    } else {
+        enemiesArray.push(new EnemyGroup(10 * wave, Math.floor(Math.random() * 1)));
+        enemiesArray[0].init();
+    }
 }
 
 function init_shots() {
@@ -59,7 +63,7 @@ function init_mainLoopManagement() {
     lastTimeStampUpdate = 0;
 }
 
-function init_wave () {
+function init_wave() {
     wave = 1;
 }
 
@@ -70,14 +74,14 @@ function init_wave () {
 function updateHealthBar(p) {
     healthBar = document.getElementById("hp");
     healthBar.innerHTML = "";
-    for (i=0; i<p.hp; i++) {
+    for (i = 0; i < p.hp; i++) {
         let h = document.createElement("img");
         h.src = "./Images/life.png";
         h.style.height = "100%"
         healthBar.appendChild(h);
-                
+
     }
-    
+
 }
 
 /**
@@ -149,10 +153,11 @@ function manageShot() {
 function manageEnemies() {
     if (enemiesArray.length == 0) {
         wave++;
-        enemiesArray.push(new EnemyGroup(10 * wave), Math.floor(Math.random() * 1));
-    }
-    for (i = 0; i<enemiesArray.length; i++) {
-        enemiesArray[i].manage();
+        init_Enemies()
+    } else {
+        for (i = 0; i < enemiesArray.length; i++) {
+            enemiesArray[i].manage();
+        }
     }
 }
 

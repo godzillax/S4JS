@@ -56,7 +56,7 @@ function EnemyGroup(nbEnemies, pattern) {
     this.manageDeath = function () {
         let tab = new Array();
         for (i = 0; i<this.arrayEnemies.length; i++) {
-            if (this.arrayEnemies[i].health == 0) {
+            if (this.arrayEnemies[i].health <= 0) {
                 tab.push(i)
             }
         }
@@ -68,7 +68,11 @@ function EnemyGroup(nbEnemies, pattern) {
     this.manage = function() {
         this.manageDeath();
         this.move();
-        if (this.arrayEnemies.length == 0)
+        if (this.arrayEnemies.length == 0) {
+            console.log(enemiesArray.length)
+            console.log("spliced")
             enemiesArray.splice(enemiesArray.indexOf(this), 1);
+            console.log(enemiesArray.length)
+        }
     }
 }
