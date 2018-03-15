@@ -5,6 +5,9 @@ function Player() {
     this.score = 0;
     this.hp = 5;
 
+    this.audio;
+    this.playerAudio;
+
     // Shoot cadency in ms
     this.cadency = 0.33;
     
@@ -115,15 +118,52 @@ function Player() {
         this.isHit = 1;
         this.hp--;
         if (this.hp <= 0) {
-            this.death();
+            this.explode();
         } else {
-            this.img.src = './Images/playerHit.png';
+            this.blink();
         }
+        // updateHealthBar(this);
+    }
+
+    this.blink = function() {
+        var blink = 1;
+        window.setInterval(function() {
+            if(blink == 1) {
+                this.img.src = "./Images/playerHit.png";
+                blink-=1;
+            } else {
+                this.img.src = "./Images/player.png";
+                blink+=1;
+            }
+        }, 1000);
+    }
+
+    // this.blinkOnHit = function() {
+    //     this.img.src = "./Images/playerHit.png";
+    //     myvar = window.setTimeout(this.blinkOnHit2(), 1000);
+    // }
+
+    // this.blinkOnHit2 = function() {
+    //     this.img.src = "./Images/player.png";
+    //     window.setTimeout(this.blinkOnHit(), 1000);
+    // }
+
+    this.explode = function() {
+        this.startAudio();
+        this.death();
     }
 
     this.death = function () {
-        this.img.src = '';
+        this.balise_perso.removeChild(this.img);
+        this.playerAudio.removeChild(this.audio);
     }
     
+    this.startAudio = function() {
+        this.playerAudio = document.getElementById("audio");
+        this.audio = document.createElement("audio");
+        this.audio.src = "./son/atari_boom.wav";
+        this.playerAudio.appendChild(this.audio);
+        this.audio.play();
+    }
     
 }
