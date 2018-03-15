@@ -147,7 +147,7 @@ function manageEnemies() {
         enemiesArray[0].push(new EnemyGroup(10 * wave))
     }
     for (i = 0; i<EnemiesArray.length; i++) {
-        
+        enemiesArray[i].manage();
     }
 }
 
