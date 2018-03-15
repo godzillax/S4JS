@@ -16,8 +16,14 @@ function EnemyGroup(nbEnemies, pattern) {
         this.spawn();
     }
     
+    /**
+     * Spawn the enemies following the indicated pattern
+     */
     this.spawn = function() {
-        eval("this.spawnPattern" + this.pattern + "()");
+        if (this.pattern <= this.nbpattern)
+            eval("this.spawnPattern" + this.pattern + "()");
+        else
+            this.spawnPattern1();
     }
     
     /**

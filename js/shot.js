@@ -87,6 +87,7 @@ function Shot(shooter) {
 
     /**
      * A bullet hits when it collides with a player or an enemy
+     * A REDEFINIR
      */
     this.hit = function (shot) {
         if (this.coordX == shot.coordX && this.coordY == shot.coordY) {

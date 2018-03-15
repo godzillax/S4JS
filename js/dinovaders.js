@@ -133,11 +133,15 @@ function makePlayerAction() {
 }
 
 /**
- * Manages the movement of the shots
+ * Manages the movement and the collision of the shots
  * @returns {undefined}
  */
-function manageShotMovement() {
+function manageShot() {
     for (i = 0; i < shotArray.length; i++) {
+        enemiesArray.forEach(function () {
+            shotArray[i].hit(this);
+        })
+        shotArray[i].hit(player);
         shotArray[i].move();
     }
 }
@@ -145,7 +149,7 @@ function manageShotMovement() {
 function manageEnemies() {
     if (enemiesArray.length == 0) {
         wave++;
-        enemiesArray.push(new EnemyGroup(10 * wave))
+        enemiesArray.push(new EnemyGroup(10 * wave), Math.floor(Math.random() * 1));
     }
     for (i = 0; i<enemiesArray.length; i++) {
         enemiesArray[i].manage();
@@ -157,7 +161,7 @@ function manageEnemies() {
  */
 function update() {
     makePlayerAction()
-    manageShotMovement()
+    manageShot()
     manageEnemies()
 }
 
