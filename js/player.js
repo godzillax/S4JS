@@ -119,6 +119,7 @@ function Player() {
         } else {
             this.img.src = './Images/playerHit.png';
         }
+        updateHealthBar(this);
     }
 
     this.death = function () {
