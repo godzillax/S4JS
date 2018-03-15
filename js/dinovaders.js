@@ -26,6 +26,12 @@ function init_player() {
     player.init();
 }
 
+/**
+ * Generates the enemies, if no parameters are specified, then it will follow the classical pattern :
+ * - Generate between wave*3 and wave*10 enemies, with a random pattern
+ * @param {type} nbEnemies
+ * @param {type} nbgroups
+ */
 function init_Enemies(nbEnemies, nbgroups) {
     enemiesArray = new Array();
     if (nbgroups && nbEnemies) {

@@ -15,64 +15,67 @@ function EnemyGroup(nbEnemies, pattern) {
         this.arrayEnemies = new Array();
         this.spawn();
     }
-    
+
     /**
      * Spawn the enemies following the indicated pattern
      */
-    this.spawn = function() {
+    this.spawn = function () {
         if (this.pattern <= this.nbpattern)
             eval("this.spawnPattern" + this.pattern + "()");
         else
             this.spawnPattern1();
     }
-    
+
     /**
      * First enemy spawn pattern, they will spawn randomly
      * and go straight to the left. They can shoot.
      */
-    this.spawnPattern1 = function() {
+    this.spawnPattern1 = function () {
         let x = window.innerWidth + 50;
         let y;
-        
+
         balEnemy = document.getElementById('enemy');
         this.balGrp = document.createElement("div");
         balEnemy.appendChild(this.balGrp);
-        
-        for (i = 0; i<this.nbEnemies; i++) {
+
+        for (i = 0; i < this.nbEnemies; i++) {
             y = Math.floor(Math.random() * window.innerHeight);
             x = x + 50;
-            
-            this.arrayEnemies[i] = new Enemy(x, y, 1, 5, 90, 75, 1, 15, this.balGrp);
+
+            this.arrayEnemies[i] = new Enemy(x, y, 1, 5 + Math.random() * 5, 90, 75, 1, 15, this.balGrp);
             this.arrayEnemies[i].init();
         }
     }
     
-    this.move = function() {
-        for (i = 0; i<this.arrayEnemies.length; i++) {
+    this.move1 = function() {
+        for (i = 0; i < this.arrayEnemies.length; i++) {
             this.arrayEnemies[i].move(0);
         }
     }
+
+    this.move = function () {
+        if (this.pattern == 1)
+            this.move1();
+    }
     
+
     this.manageDeath = function () {
         let tab = new Array();
-        for (i = 0; i<this.arrayEnemies.length; i++) {
+        for (i = 0; i < this.arrayEnemies.length; i++) {
             if (this.arrayEnemies[i].health <= 0) {
                 tab.push(i)
             }
         }
-        for (i = 0; i<tab.length; i++) {
+        for (i = 0; i < tab.length; i++) {
             this.arrayEnemies.splice(tab[i], 1);
         }
     }
-    
-    this.manage = function() {
+
+    this.manage = function () {
         this.manageDeath();
         this.move();
         if (this.arrayEnemies.length == 0) {
-            console.log(enemiesArray.length)
-            console.log("spliced")
             enemiesArray.splice(enemiesArray.indexOf(this), 1);
-            console.log(enemiesArray.length)
         }
     }
 }
