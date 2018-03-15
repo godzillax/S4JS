@@ -30,7 +30,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
             this.image.src = "./Images/Drone.png";
         }
         else this.image.src = this.imagesrc;
-        this.image.style.width = this.width;
+        this.image.style.width = this.width+"px";
         this.spawn();
     }
     
