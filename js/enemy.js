@@ -1,13 +1,47 @@
-function Enemy(x, y, hp, speed, size, pace, points){
+function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
     this.coordX;
     this.coordY;
     this.health;
     this.speed;
-    this.size;
+    this.width;
+    this.height;
     this.pace;
     this.points;
+    this.image;
     
-    function move(a){
+        
+    this.init= function(){
+        this.coordX = x;
+        this.coordY = y;
+        this.health = hp;
+        this.speed = speed;
+        this.width = w;
+        this.height = h;
+        this.pace = cadency;
+        this.points = pts;
+        
+        this.image = document.createElement("img");
+        this.image.top = this.coordY;
+        this.image.left = this.coordX;      
+        if (!imgsrc){
+            this.image.src = "./Images/Drone.png";
+        }
+        else this.image.src = this.imagesrc;
+        this.image.style.width = this.width;
+        this.spawn();
+    }
+    
+    this.spawn= function(){
+        if (!div) {
+            document.getElementById("enemy").appendChild(this.image)
+        }
+        div.appendChild(this.image);
+    }
+    /**
+     * 
+     * @param entier entre 0 et 7 indiquant la direction a
+     */
+    this.move = function(a){
         switch(a){
             case 0 : 
                 this.moveLeft();
@@ -40,52 +74,79 @@ function Enemy(x, y, hp, speed, size, pace, points){
         }
     }
     
-    function moveUp(){
+    this.moveUp= function(){
         this.coordY += speed;
     }
     
-    function moveDown(){
+    this.moveDown= function(){
         this.coordY -= speed;
     }
     
-    function moveLeft(){
+    this.moveLeft= function(){
         this.coordX -= speed;
     }
     
-    function moveRight(){
+    this.moveRight= function(){
         this.coordX += speed;
     }
     
-    function shoot(){
-        
+    /**
+     * 
+     * @param player or shot obj
+     */
+    this.collision = function(obj){
+        var col = false;
+         if (this.coordX <= obj.coordX + obj.width){
+             if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
+                 col = true;
+             }
+             if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
+                 col = true;
+             }
+         }
+         if (col) {
+             obj.hit();
+             this.hit();
+         }
+         return col;
     }
     
-    
-    //renvoie true si this.y<=obj.y<=y+size || this.y<=obj.y+obj.size<=y+size Et pareil pour x
-    function collision(obj){
-         
+    this.collisionPlayer= function(){
+        var col = false;
+         if (this.coordX <= player.coordX + player.width){
+             if ((this.coordY < player.coordY) && (this.coordY + this.height > player.coordY)) {
+                 col = true;
+             }
+             if ((this.coordY > player.coordY) && (this.coordY < player.coordY + player.height)) {
+                 col = true;
+             }
+         }
+         if (col) {
+             player.hit();
+             this.hit();
+         }
+         return col;
     }
     
-    function hit(){
+    this.hit= function(){
         this.health --;
         if (this.health === 0){
-            this.die;
+            this.death;
         }
     }
     
-    function die(){
-        
+    this.death= function(){
+        div.removeChild(this.image);
     }
     
-    function spawn(){
-        
+    this.shoot= function(){
+        if (this.pace == -1){
+            
+        }
+        //pas qu'ils tirent s'ils sont en dehors de l'écran
     }
     
-    function init(){
-        
-    }
-    
-    function addScore(){
-        
+    this.addScore= function(){
+        player.score += this.points;
     }
 }
