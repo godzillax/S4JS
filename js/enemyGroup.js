@@ -1,5 +1,4 @@
 function EnemyGroup(nbEnemies, pattern) {
-    this.arrayEnemies;
     this.nbEnemies;
     this.pattern = 1;
     this.balGrp;
@@ -14,10 +13,11 @@ function EnemyGroup(nbEnemies, pattern) {
         if (pattern)
             this.pattern = pattern;
         this.arrayEnemies = new Array();
+        this.spawn();
     }
     
     this.spawn = function() {
-        eval("spawnPattern" + this.pattern + "()");
+        eval("this.spawnPattern" + this.pattern + "()");
     }
     
     /**
@@ -36,7 +36,8 @@ function EnemyGroup(nbEnemies, pattern) {
             x = Math.floor(Math.random() * window.innerHeight);
             y = y + 50;
             
-            this.arrayEnemies[i] = new Enemy(x, y, 1, 10, 90, 75, 1, 15, this.balGrp, this.img);
+            this.arrayEnemies[i] = new Enemy(x, y, 1, 10, 90, 75, 1, 15, this.balGrp);
+            this.arrayEnemies[i].init();
         }
     }
     
@@ -61,5 +62,7 @@ function EnemyGroup(nbEnemies, pattern) {
     this.manage = function() {
         this.manageDeath();
         this.move();
+        if (this.arrayEnemies.length == 0)
+            enemiesArray.splice(enemiesArray.indexOf(this), 1);
     }
 }
