@@ -87,6 +87,7 @@ function Shot(shooter) {
 
     /**
      * A bullet hits when it collides with a player or an enemy
+     * A REDEFINIR
      */
     this.hit = function (shot) {
         if (this.coordX == shot.coordX && this.coordY == shot.coordY) {
@@ -100,7 +101,6 @@ function Shot(shooter) {
      * The bullet is out of the window
      */
     this.death = function () {
-        //this.img_shoot.src = "";
         // On supprime le shot
         this.balise_shoot.removeChild(this.img_shoot)
         // On le supprime du tableau global

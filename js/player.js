@@ -128,7 +128,7 @@ function Player() {
                 this.blink();
             }
         }
-        // updateHealthBar(this);
+        updateHealthBar(this);
     }
 
     this.blink = function() {
@@ -145,6 +145,7 @@ function Player() {
             }
             
         }
+
         if (this.blinker <= -1) {
             this.img.src = "./Images/player.png";
             this.isHit = 0;
@@ -155,6 +156,8 @@ function Player() {
     this.explode = function() {
         this.startAudio();
         this.death();
+
+       
     }
 
     this.death = function () {

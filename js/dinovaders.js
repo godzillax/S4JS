@@ -9,11 +9,14 @@
  * Called when the page loads. It will initiates all the elements, then launch the game
  */
 function initGame() {
+    init_wave() 
     init_player()
     init_shots()
+    init_Enemies() 
     init_mainMusic()
     init_playerControll()
     init_mainLoopManagement()
+    updateHealthBar(player);
 
     requestAnimationFrame(mainLoop);
 }
@@ -23,12 +26,18 @@ function init_player() {
     player.init();
 }
 
+function init_Enemies() {
+    enemiesArray = new Array();
+    enemiesArray[0] = new EnemyGroup(10,1);
+    enemiesArray[0].init();
+}
+
 function init_shots() {
     shotArray = new Array();
 }
 
 function init_mainMusic() {
-    balAudio = document.getElementById("audio")
+    balAudio = document.getElementById("audio");
     mainMusic = document.createElement("audio");
     mainMusic.src = "./son/bensound-summer.mp3"
     balAudio.appendChild(mainMusic);
@@ -48,6 +57,27 @@ function init_playerControll() {
 function init_mainLoopManagement() {
     fps = 60;
     lastTimeStampUpdate = 0;
+}
+
+function init_wave () {
+    wave = 1;
+}
+
+/**
+ * Init the health bar depending of the player's hp
+ * @param Player p
+ */
+function updateHealthBar(p) {
+    healthBar = document.getElementById("hp");
+    healthBar.innerHTML = "";
+    for (i=0; i<p.hp; i++) {
+        let h = document.createElement("img");
+        h.src = "./Images/life.png";
+        h.style.height = "100%"
+        healthBar.appendChild(h);
+                
+    }
+    
 }
 
 /**
@@ -81,6 +111,7 @@ function playerActionEnd(event) {
         lastShot = 0;
 }
 
+
 /**
  * Manages the player Actions
  */
@@ -102,20 +133,36 @@ function makePlayerAction() {
 }
 
 /**
- * Manages the movement of the shots
+ * Manages the movement and the collision of the shots
  * @returns {undefined}
  */
-function manageShotMovement() {
+function manageShot() {
     for (i = 0; i < shotArray.length; i++) {
+        enemiesArray.forEach(function () {
+            shotArray[i].hit(this);
+        })
+        shotArray[i].hit(player);
         shotArray[i].move();
     }
 }
+
+function manageEnemies() {
+    if (enemiesArray.length == 0) {
+        wave++;
+        enemiesArray.push(new EnemyGroup(10 * wave), Math.floor(Math.random() * 1));
+    }
+    for (i = 0; i<enemiesArray.length; i++) {
+        enemiesArray[i].manage();
+    }
+}
+
 /**
  * Update the game, player and enemy position
  */
 function update() {
     makePlayerAction()
-    manageShotMovement()
+    manageShot()
+    manageEnemies()
 }
 
 /**
