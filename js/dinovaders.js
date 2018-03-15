@@ -27,8 +27,9 @@ function init_player() {
 }
 
 function init_Enemies() {
-    EnemiesArray = new Array();
-    EnemiesArray[0] = new EnemyGroup(10);
+    enemiesArray = new Array();
+    enemiesArray[0] = new EnemyGroup(10,1);
+    enemiesArray[0].init();
 }
 
 function init_shots() {
@@ -144,9 +145,9 @@ function manageShotMovement() {
 function manageEnemies() {
     if (enemiesArray.length == 0) {
         wave++;
-        enemiesArray[0].push(new EnemyGroup(10 * wave))
+        enemiesArray.push(new EnemyGroup(10 * wave))
     }
-    for (i = 0; i<EnemiesArray.length; i++) {
+    for (i = 0; i<enemiesArray.length; i++) {
         enemiesArray[i].manage();
     }
 }
