@@ -31,7 +31,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
         }
         else this.image.src = this.imagesrc;
         this.image.style.position = "fixed";
-        this.image.style.width = this.width;
+        this.image.style.width = this.width+"px";
         this.spawn();
     }
     
