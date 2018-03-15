@@ -26,6 +26,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
         this.image = document.createElement("img");
         this.image.style.top = this.coordX+"px";
         this.image.style.left = this.coordY+"px";
+      
         this.image.style.position = "fixed";
         if (!imgsrc){
             this.image.src = "./Images/Drone.png";
@@ -53,8 +54,8 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc){
                 document.getElementById("enemy").removeChild(this.image)
             }
             div.removeChild(this.image);
-            this.image.top = this.coordY+"px";
-            this.image.left = this.coordX+"px";
+            this.image.style.top = this.coordY+"px";
+            this.image.style.left = this.coordX+"px";
             this.spawn();
         }
     }
