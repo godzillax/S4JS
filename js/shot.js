@@ -103,9 +103,6 @@ function Shot(shooter) {
      */
     this.hit = function (obj) {
         var col = false;
-        
-        console.log(Object.getPrototypeOf(obj).constructor.name);
-
         if (Object.getPrototypeOf(obj).constructor.name === "Enemy") {
             if (this.coordX >= obj.coordX){
                  if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {

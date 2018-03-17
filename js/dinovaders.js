@@ -149,12 +149,16 @@ function manageShot() {
 function manageShot() {
     for (i = 0; i < shotArray.length; i++) {
         for (j = 0; j < enemiesArray.length; j++) {
-            for (k = 0; k < enemiesArray[j].length; k++ ) {
-                shotArray[i].hit(enemiesArray[j].arrayEnnemies[k]);
+            for (k = 0; k < enemiesArray[j].arrayEnemies.length; k++ ) {
+                if( shotArray[i]){
+                    shotArray[i].hit(enemiesArray[j].arrayEnemies[k]);
+                }
             }
         }
-        shotArray[i].hit(player);
-        shotArray[i].move();
+        if( shotArray[i]){
+            shotArray[i].hit(player);
+            shotArray[i].move();
+        }
     }
 }
 
