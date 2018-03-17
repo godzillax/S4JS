@@ -98,12 +98,45 @@ function Shot(shooter, speed) {
      * A bullet hits when it collides with a player or an enemy
      * A REDEFINIR
      */
-    this.hit = function (shot) {
-        if (this.coordX == shot.coordX && this.coordY == shot.coordY) {
-            shot.hit();
+//    this.hit = function (shot) {
+//        if (this.coordX == shot.coordX && this.coordY == shot.coordY) {
+//            shot.hit();
+//            this.death();
+//        }
+//        return true;
+//    }
+    /**
+     * 
+     * @param {type} obj
+     * @returns if this hit obj
+     */
+    this.hit = function (obj) {
+        var col = false;
+        if (Object.getPrototypeOf(obj).constructor.name === "Enemy") {
+            if (this.coordX >= obj.coordX){
+                 if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
+                    col = true;
+                 }
+                 if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
+                    col = true;
+                 }
+            }
+        }
+        else if (Object.getPrototypeOf(obj).constructor.name === "Player") {
+            if (this.coordX <= obj.coordX + obj.width){
+                 if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
+                     col = true;
+                 }
+                 if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
+                     col = true;
+                 }
+            }
+        }
+        if(col){
+            obj.hit();
             this.death();
         }
-        return true;
+        return col;
     }
 
     /**

@@ -154,11 +154,11 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
         }
         return col;
     }
-
-    this.hit = function () {
-        this.health--;
-        if (this.health === 0) {
-            this.death;
+    
+    this.hit= function(){
+        this.health --;
+        if (this.health === 0){
+            this.death();
         }
     }
 
