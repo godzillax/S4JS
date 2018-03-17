@@ -112,25 +112,17 @@ function Shot(shooter, speed) {
      */
     this.hit = function (obj) {
         var col = false;
-        if (Object.getPrototypeOf(obj).constructor.name === "Enemy") {
-            if (this.coordX >= obj.coordX){
-                 if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
-                    col = true;
-                 }
-                 if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
-                    col = true;
-                 }
+        //Vu que la hitbox de obj est plus grande que sa forme, on prend le milieu du tir, c'est plus joli.
+        if (this.coordX + this.width/2 >= obj.coordX && this.coordX + this.width/2 <= obj.coordX + obj.width){
+            if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
+               col = true;
+            }
+            if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
+               col = true;
             }
         }
-        else if (Object.getPrototypeOf(obj).constructor.name === "Player") {
-            if (this.coordX <= obj.coordX + obj.width){
-                 if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
-                     col = true;
-                 }
-                 if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
-                     col = true;
-                 }
-            }
+        if (Object.getPrototypeOf(obj).constructor.name === Object.getPrototypeOf(shooter).constructor.name){
+            col = false;
         }
         if(col){
             obj.hit();
