@@ -159,6 +159,9 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     
     this.hit= function(){
         this.health --;
+        if (this.health === 0){
+            this.death();
+        }
     }
 
     this.death = function () {

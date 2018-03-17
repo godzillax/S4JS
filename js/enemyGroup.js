@@ -73,10 +73,17 @@ function EnemyGroup(nbEnemies, pattern) {
             }
         }
     }
+    
+    this.manageCollision = function () {
+        for (i = 0; i < this.arrayEnemies.length; i++) {
+            this.arrayEnemies[i].collisionPlayer();
+        }
+    }
 
     this.manage = function () {
         this.move();
         this.manageDeath();
+        this.manageCollision();
         if (this.arrayEnemies.length == 0) {
             enemiesArray.splice(enemiesArray.indexOf(this), 1);
         }
