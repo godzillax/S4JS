@@ -9,6 +9,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     this.points;
     this.image;
     this.lastShot = 0;
+    this.disappear = 20;
 
 
 
@@ -43,7 +44,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     }
 
     this.updatePosition = function () {
-        if (!this.removed){
+        if (!this.removed) {
             if (this.coordX < -this.width) {
                 this.death();
             } else {
@@ -56,6 +57,10 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
                     this.spawn();
                 }
             }
+        } else {
+            this.disappear--;
+            if (this.disappear == 0)
+                div.removeChild(this.image);
         }
     }
     /**
@@ -141,25 +146,17 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     }
 
     this.collisionPlayer = function () {
-        var col = false;
-        if (this.coordX + this.width/2 >= player.coordX && this.coordX + this.width/2 <= player.coordX + player.width) {
-            if ((this.coordY < player.coordY) && (this.coordY + this.height > player.coordY)) {
-                col = true;
-            }
-            if ((this.coordY > player.coordY) && (this.coordY < player.coordY + player.height)) {
-                col = true;
+        if ((this.coordX >= player.coordX && this.coordX <= player.coordX + player.width) || (this.coordX + this.width >= player.coordX && this.coordX + this.width < player.coordX + player.width)) {
+            if ((this.coordY >= player.coordY && this.coordY <= player.coordY + player.height) || (this.coodY + this.height >= player.coordY && this.coodY + this.height <= player.coordY + player.height)) {
+                player.hit();
+                this.hit();
             }
         }
-        if (col) {
-            player.hit();
-            this.hit();
-        }
-        return col;
     }
-    
-    this.hit= function(){
-        this.health --;
-        if (this.health === 0){
+
+    this.hit = function () {
+        this.health--;
+        if (this.health === 0) {
             this.death();
         }
     }
@@ -169,14 +166,16 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
             this.health = 0;
             this.removed = 1;
             div.removeChild(this.image);
+            this.image.src = "./Images/explosion.png";
+            div.appendChild(this.image)
         }
     }
 
     this.shoot = function () {
-        if (this.coordX < window.innerWidth && this.coordY < window.innerHeight && this.coordX>0 && this.coordY >0) {
+        if (this.coordX < window.innerWidth && this.coordY < window.innerHeight && this.coordX > 0 && this.coordY > 0) {
             if (this.pace != -1) {
                 t = timestamp();
-                if (t > this.lastShot + this.pace*1000) {
+                if (t > this.lastShot + this.pace * 1000) {
                     this.lastShot = t;
                     shot = new Shot(this, this.speed);
                     shot.init();
@@ -190,7 +189,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     this.addScore = function () {
         player.score += this.points;
     }
-    
+
     this.willBeDead = function () {
         return this.health === 1;
     }

@@ -62,7 +62,7 @@ function EnemyGroup(nbEnemies, pattern) {
     this.manageDeath = function () {
         let tab = new Array();
         for (i = 0; i < this.arrayEnemies.length; i++) {
-            if (this.arrayEnemies[i].health <= 0) {
+            if (this.arrayEnemies[i].health <= 0 && this.arrayEnemies[i].disappear == 0) {
                 tab.push(i)
             }
         }
