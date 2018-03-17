@@ -169,7 +169,6 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
             this.health = 0;
             this.removed = 1;
             div.removeChild(this.image);
-            this.addScore();
         }
     }
 
@@ -192,7 +191,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
         player.score += this.points;
     }
     
-    this.isDead = function () {
-        return this.health === 0;
+    this.willBeDead = function () {
+        return this.health === 1;
     }
 }

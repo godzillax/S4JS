@@ -126,7 +126,7 @@ function Shot(shooter, speed) {
         }
         if(col){
             if (Object.getPrototypeOf(obj).constructor.name == "Enemy") {
-                if (obj.isDead()) {
+                if (obj.willBeDead()) {
                     obj.addScore();
                 }
             }
