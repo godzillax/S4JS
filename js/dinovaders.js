@@ -70,7 +70,7 @@ function init_playerControll() {
 }
 
 function init_mainLoopManagement() {
-    fps = 60;
+    fps = 80;
     lastTimeStampUpdate = 0;
 }
 

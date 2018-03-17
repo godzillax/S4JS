@@ -82,7 +82,7 @@ function EnemyGroup(nbEnemies, pattern) {
 
     this.manage = function () {
         this.move();
-        //this.manageCollision();
+        this.manageCollision();
         this.manageDeath();
         if (this.arrayEnemies.length == 0) {
             enemiesArray.splice(enemiesArray.indexOf(this), 1);

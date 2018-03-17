@@ -142,7 +142,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
 
     this.collisionPlayer = function () {
         var col = false;
-        if (this.coordX <= player.coordX + player.width) {
+        if (this.coordX + this.width/2 >= player.coordX && this.coordX + this.width/2 <= player.coordX + player.width) {
             if ((this.coordY < player.coordY) && (this.coordY + this.height > player.coordY)) {
                 col = true;
             }
