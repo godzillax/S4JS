@@ -70,7 +70,7 @@ function init_playerControll() {
 }
 
 function init_mainLoopManagement() {
-    fps = 80;
+    fps = 65;
     lastTimeStampUpdate = 0;
 }
 
@@ -164,16 +164,16 @@ function manageShot() {
 function manageShot() {
     for (i = 0; i < shotArray.length; i++) {
         for (j = 0; j < enemiesArray.length; j++) {
-            for (k = 0; k < enemiesArray[j].arrayEnemies.length; k++ ) {
-                if( shotArray[i]){
+            for (k = 0; k < enemiesArray[j].arrayEnemies.length; k++) {
+                if (shotArray[i]) {
                     shotArray[i].hit(enemiesArray[j].arrayEnemies[k]);
                 }
             }
         }
-        if( shotArray[i]){
+        if (shotArray[i]) {
             shotArray[i].hit(player);
         }
-        if( shotArray[i]){
+        if (shotArray[i]) {
             shotArray[i].move();
         }
     }
@@ -206,7 +206,7 @@ function maj_score(p) {
     balscore.innerHTML = "";
     textScore = document.createElement("p");
     textScore.innerHTML = "";
-    textScore.innerHTML = "Score : " + p.score +" ";
+    textScore.innerHTML = "Score : " + p.score + " ";
     balscore.appendChild(textScore);
 }
 
@@ -220,6 +220,28 @@ function mainLoop() {
         update();
         lastTimeStampUpdate = t;
     }
-    requestAnimationFrame(mainLoop);
+    if (player.hp == 0) {
+        document.getElementById("announcer").innerHTML = "GAME OVER";
+        document.getElementById('audio').removeChild(mainMusic)
+        gameOver()
+    } else
+        requestAnimationFrame(mainLoop);
 }
 
+function gameOver() {
+    if (timestamp() > (t + 5000)) {
+        resetGame()
+    }else
+        requestAnimationFrame(gameOver);
+}
+
+function resetGame() {
+    document.getElementById("announcer").innerHTML = "";
+    document.getElementById('score').innerHTML = "";
+    document.getElementById('enemy').innerHTML = "";
+    document.getElementById('hp').innerHTML = "";
+    document.getElementById('player').innerHTML = "";
+    document.getElementById('shot').innerHTML = "";
+    document.getElementById('audio').innerHTML = "";
+    initGame();
+}

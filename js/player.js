@@ -181,7 +181,9 @@ function Player() {
 
     this.death = function () {
         this.balise_perso.removeChild(this.img);
-        this.playerAudio.removeChild(this.audio);
+        this.img.src = "./Images/explosion.png";
+        this.balise_perso.appendChild(this.img)
+        //this.playerAudio.removeChild(this.audio);
     }
     
     this.startAudio = function() {
