@@ -150,6 +150,10 @@ function Player() {
         updateHealthBar(this);
     }
 
+    /**
+     * When the player is hit, it will blink a few times
+     * @returns {undefined}
+     */
     this.blink = function() {
         this.t = timestamp();
         if (this.t > (this.lastBlink+500)){
@@ -172,10 +176,12 @@ function Player() {
 
     }
 
+    /**
+     * When the player reach 0 hp, it will reach
+     * @returns {undefined}
+     */
     this.explode = function() {
-        // CREATES DOM ERROR :
-        //Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause().
-        this.startAudio();
+        this.startAudioBoom();
         this.death();
     }
 
@@ -186,7 +192,7 @@ function Player() {
         //this.playerAudio.removeChild(this.audio);
     }
     
-    this.startAudio = function() {
+    this.startAudioBoom = function() {
         this.playerAudio = document.getElementById("audio");
         this.audio = document.createElement("audio");
         this.audio.src = "./son/atari_boom.wav";

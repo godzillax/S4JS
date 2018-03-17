@@ -99,11 +99,6 @@ function EnemyGroup(nbEnemies, pattern) {
         t = this.arrayEnemies.length
         for (i = 0; i < t; i++) {
             let c = this.arrayEnemies[i].collisionPlayer();
-            
-            // For an unknow reason, this 'for' becomes sometimes an infinite loop, to avoid that, we break the loop when an enemy enters in collision with the player
-            // If an other ennemy is also in collision with the player, this collision will be treated in the next frame
-            if (c)
-                break
         }
     }
 

@@ -124,33 +124,14 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
         this.coordX += this.speed;
     }
 
-    /**
-     * 
-     * @param player or shot obj
-     */
-    this.collision = function (obj) {
-        var col = false;
-        if (this.coordX <= obj.coordX + obj.width) {
-            if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
-                col = true;
-            }
-            if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
-                col = true;
-            }
-        }
-        if (col) {
-            obj.hit();
-            this.hit();
-        }
-        return col;
-    }
 
     this.collisionPlayer = function () {
         if ((this.coordX >= player.coordX && this.coordX <= player.coordX + player.width) || (this.coordX + this.width >= player.coordX && this.coordX + this.width <= player.coordX + player.width)) {
             if ((this.coordY >= player.coordY && this.coordY <= player.coordY + player.height) || (this.coordY + this.height >= player.coordY && this.coordY + this.height <= player.coordY + player.height)) {
                 player.hit();
                 this.hit();
-                this.coordX = -100;
+                // We place the enemy out of the map to avoid an infinite loop : The enemy has already collided with the player, we make sure it will not happen again
+                this.coordX = -100; 
                 return true
             }
         }
