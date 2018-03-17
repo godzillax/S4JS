@@ -198,6 +198,16 @@ function update() {
     makePlayerAction()
     manageShot()
     manageEnemies()
+    maj_score(player)
+}
+
+function maj_score(p) {
+    balscore = document.getElementById("score");
+    balscore.innerHTML = "";
+    textScore = document.createElement("p");
+    textScore.innerHTML = "";
+    textScore.innerHTML = "Score : " + p.score +" ";
+    balscore.appendChild(textScore);
 }
 
 /**
