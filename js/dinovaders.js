@@ -172,6 +172,8 @@ function manageShot() {
         }
         if( shotArray[i]){
             shotArray[i].hit(player);
+        }
+        if( shotArray[i]){
             shotArray[i].move();
         }
     }
