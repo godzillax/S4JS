@@ -1,8 +1,16 @@
+
+/**
+ * A group of ennemies. They will have similar behavior depending on a patern 
+ * @param {type} nbEnemies The number of enemies in the group
+ * @param {type} pattern The pattern that will define their behavior
+ * @returns {EnemyGroup}
+ */
 function EnemyGroup(nbEnemies, pattern) {
     this.nbEnemies;
     this.pattern = 1;
     this.balGrp;
     this.img = "./Images/Drone.png"
+    this.num = 0
 
     /**
      * Inititates the group
@@ -46,7 +54,10 @@ function EnemyGroup(nbEnemies, pattern) {
             this.arrayEnemies[i].init();
         }
     }
-// 5 + Math.floor(Math.random() * 10)
+
+    /**
+     * The basics actions of the pattern 1 : The ennemies go straight and can shoot
+     */
     this.move1 = function () {
         for (i = 0; i < this.arrayEnemies.length; i++) {
             this.arrayEnemies[i].move(0);
@@ -54,11 +65,18 @@ function EnemyGroup(nbEnemies, pattern) {
         }
     }
 
+
+    /**
+     *  The move action of the Group depending on the chosen patern
+     */
     this.move = function () {
         eval("this.move" + this.pattern + "()");
     }
 
 
+    /**
+     * Manage the death of the enemies. When an enemy died, this function will remove it from the array
+     */
     this.manageDeath = function () {
         let tab = new Array();
         for (i = 0; i < this.arrayEnemies.length; i++) {
@@ -68,18 +86,32 @@ function EnemyGroup(nbEnemies, pattern) {
         }
 
         if (tab.length > 0) {
-            for (i = tab.length-1; i >= 0; i--) {
+            for (i = tab.length - 1; i >= 0; i--) {
                 this.arrayEnemies.splice(tab[i], 1);
             }
         }
     }
-    
+
+    /**
+     * Manages the collision with the player
+     */
     this.manageCollision = function () {
-        for (i = 0; i < this.arrayEnemies.length; i++) {
-            this.arrayEnemies[i].collisionPlayer();
+        t = this.arrayEnemies.length
+        for (i = 0; i < t; i++) {
+            let c = this.arrayEnemies[i].collisionPlayer();
+            
+            // For an unknow reason, this 'for' becomes sometimes an infinite loop, to avoid that, we break the loop when an enemy enters in collision with the player
+            // If an other ennemy is also in collision with the player, this collision will be treated in the next frame
+            if (c)
+                break
         }
     }
 
+    /**
+     * Main function of the class. This will be called each frame
+     * Moves the enemies, manages their collision with the player, manages their death.
+     * If all the enemies died, the group will be removed from the global array
+     */
     this.manage = function () {
         this.move();
         this.manageCollision();

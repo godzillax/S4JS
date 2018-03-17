@@ -146,14 +146,17 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     }
 
     this.collisionPlayer = function () {
-        if ((this.coordX >= player.coordX && this.coordX <= player.coordX + player.width) || (this.coordX + this.width >= player.coordX && this.coordX + this.width < player.coordX + player.width)) {
-            if ((this.coordY >= player.coordY && this.coordY <= player.coordY + player.height) || (this.coodY + this.height >= player.coordY && this.coodY + this.height <= player.coordY + player.height)) {
+        if ((this.coordX >= player.coordX && this.coordX <= player.coordX + player.width) || (this.coordX + this.width >= player.coordX && this.coordX + this.width <= player.coordX + player.width)) {
+            if ((this.coordY >= player.coordY && this.coordY <= player.coordY + player.height) || (this.coordY + this.height >= player.coordY && this.coordY + this.height <= player.coordY + player.height)) {
                 player.hit();
                 this.hit();
+                this.coordX = -100;
+                return true
             }
         }
+        return false
     }
-
+    
     this.hit = function () {
         this.health--;
         if (this.health === 0) {
