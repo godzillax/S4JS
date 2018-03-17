@@ -1,4 +1,3 @@
-
 function Player() {
     this.coordX = 75;
     this.coordY;
@@ -139,8 +138,8 @@ function Player() {
         if (!this.isHit) {
             this.isHit = 1;
             this.hp--;
-            this.lastBlink = -500;
-            this.blinker = 6;
+            this.lastBlink = -250;
+            this.blinker = 10;
             if (this.hp <= 0) {
                 this.explode();
             } else {
@@ -152,7 +151,7 @@ function Player() {
 
     this.blink = function() {
         this.t = timestamp();
-        if (this.t > (this.lastBlink+500)){
+        if (this.t > (this.lastBlink+250)){
             this.lastBlink = this.t;
            
             if(this.blinker%2==0) {
