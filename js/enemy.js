@@ -188,7 +188,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
             div.removeChild(this.image);
 
             if (this.coordX > 0) {
-                this.image.src = "./Images/explode.gif";
+                this.image.src = "./Images/explosion.png";
                 div.appendChild(this.image)
 
 
