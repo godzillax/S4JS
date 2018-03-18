@@ -9,6 +9,9 @@
  * Called when the page loads. It will initiates all the elements, then launch the game
  */
 function initGame() {
+    announcer = new Announcer();
+    announcer.init();
+
     init_wave()
     init_player()
     init_shots()
@@ -17,6 +20,8 @@ function initGame() {
     init_playerControll()
     init_mainLoopManagement()
     updateHealthBar(player);
+
+    announcer.setMessage("WAVE 1")
 
     requestAnimationFrame(mainLoop);
 }
@@ -183,6 +188,7 @@ function manageShot() {
 function manageEnemies() {
     if (enemiesArray.length == 0) {
         wave++;
+        announcer.setMessage("WAVE " + wave)
         init_Enemies()
     } else {
         for (i = 0; i < enemiesArray.length; i++) {
@@ -191,15 +197,7 @@ function manageEnemies() {
     }
 }
 
-/**
- * Update the game, player and enemy position
- */
-function update() {
-    makePlayerAction()
-    manageShot()
-    manageEnemies()
-    maj_score(player)
-}
+
 
 function maj_score(p) {
     balscore = document.getElementById("score");
@@ -211,8 +209,35 @@ function maj_score(p) {
 }
 
 /**
+ * Manages the annoucer. EAch frame, the annoucer showMessage attribute will decrease by 1
+ * When it reach 0, the message will be removed
+ * @returns {undefined}
+ */
+function manageAnnouncer() {
+    if (announcer.showMessage > 0)
+        announcer.showMessage--;
+    else if (announcer.showMessage == 0) {
+        announcer.removeMessage()
+        announcer.showMessage--;
+    }
+}
+
+
+/**
+ * Update the game, player and enemy position
+ */
+function update() {
+    makePlayerAction()
+    manageShot()
+    manageEnemies()
+    maj_score(player)
+    manageAnnouncer()
+}
+
+/**
  * Main Loop of the Game
  * Calls the update method 'fps' times a second
+ * If the player reach 0 hp, the game is over
  */
 function mainLoop() {
     t = timestamp()
@@ -221,7 +246,8 @@ function mainLoop() {
         lastTimeStampUpdate = t;
     }
     if (player.hp == 0) {
-        document.getElementById("announcer").innerHTML = "GAME OVER";
+        t = timestamp()
+        announcer.setLongMessage("GAME OVER")
         document.getElementById('audio').removeChild(mainMusic)
         gameOver()
     } else
@@ -229,9 +255,11 @@ function mainLoop() {
 }
 
 function gameOver() {
+    if (timestamp() > t+2000)
+        announcer.setLongMessage("YOUR SCORE : " + player.score)
     if (timestamp() > (t + 5000)) {
         resetGame()
-    }else
+    } else
         requestAnimationFrame(gameOver);
 }
 
