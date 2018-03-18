@@ -108,7 +108,7 @@ function init_playerControll() {
  * Init the main Loop by defining the fps
  */
 function init_mainLoopManagement() {
-    fps = 70;
+    fps = 60;
     lastTimeStampUpdate = 0;
 }
 
@@ -322,6 +322,7 @@ function gameOver() {
  * @returns {undefined}
  */
 function resetGame() {
+    bannerMenu.removeBanner()
     document.getElementById("announcer").innerHTML = "";
     document.getElementById('score').innerHTML = "";
     document.getElementById('enemy').innerHTML = "";

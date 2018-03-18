@@ -1,14 +1,15 @@
 function Menu() {
     this.menuBar;
-    this.musicButton;
+    this.playMusicButton;
+    this.pauseMusicButton;
     this.playButton;
     this.pauseButton;
-    this.quitButton;
 
     this.init = function () {
         this.menuBar = document.createElement("div");
         this.menuBar.style.position = "fixed";
         this.menuBar.style.left = "400px";
+        this.menuBar.id = "BannerMenu"
 
         this.playButton = document.createElement("img");
         this.playButton.src = "./Images/start.png";
@@ -22,12 +23,19 @@ function Menu() {
         this.quitButton.src = "./Images/quit.png";
         this.quitButton.style.height = "70px";
 
-        this.musicButton = document.createElement("img");
-        this.musicButton.src = "./Images/soundOn.png";
-        this.musicButton.style.height = "70px";
+        this.pauseMusicButton = document.createElement("img");
+        this.pauseMusicButton.src = "./Images/soundOff.png";
+        this.pauseMusicButton.style.height = "70px";
+        
+        this.playMusicButton = document.createElement("img");
+        this.playMusicButton.src = "./Images/soundOn.png";
+        this.playMusicButton.style.height = "70px";
 
         this.quitButton.addEventListener("click", this.stopGame.bind(this));
-        this.musicButton.addEventListener("click", this.stopMusic.bind(this))
+        
+        this.playMusicButton.addEventListener("click", this.stopMusic.bind(this))
+        this.pauseMusicButton.addEventListener("click", this.restartMusic.bind(this))
+        
         this.pauseButton.addEventListener("click", this.pauseGame.bind(this));
         this.playButton.addEventListener("click", this.startGame.bind(this));
 
@@ -39,36 +47,25 @@ function Menu() {
         this.menuBar.appendChild(this.playButton);
         this.menuBar.appendChild(this.pauseButton);
         this.menuBar.appendChild(this.quitButton);
-        this.menuBar.appendChild(this.musicButton);
+        this.menuBar.appendChild(this.playMusicButton);
         document.getElementById("playground").appendChild(this.menuBar);
     }
 
     this.stopMusic = function () {
-        this.musicButton.src = "./Images/soundOff.png";
-        
         balAudio = document.getElementById("audio");
         balAudio.firstElementChild.pause();
-
-        this.musicButton.removeEventListener("click", this.stopMusic.bind(this));
-        this.musicButton.addEventListener("click", this.restartMusic.bind(this));
+        
+        this.menuBar.removeChild(this.playMusicButton)
+        this.menuBar.appendChild(this.pauseMusicButton);
     }
 
     this.restartMusic = function () {
-        this.musicButton.src = "./Images/soundOn.png";
         
         balAudio = document.getElementById("audio");
         balAudio.firstElementChild.play();
 
-        this.musicButton.removeEventListener("click", this.restartMusic.bind(this));
-        this.musicButton.addEventListener("click", this.stopMusic.bind(this));
-    }
-
-    this.startGame = function () {
-
-    }
-
-    this.stopGame = function () {
-
+        this.menuBar.removeChild(this.pauseMusicButton)
+        this.menuBar.appendChild(this.playMusicButton);
     }
 
     this.pauseGame = function () {
@@ -93,6 +90,10 @@ function Menu() {
 
         this.pauseButton.removeEventListener("click", this.resumeGame.bind(this));
         this.pauseButton.addEventListener("click", this.pauseGame.bind(this));
+    }
+    
+    this.removeBanner = function () {
+        this.menuBar.parentNode.removeChild(this.menuBar)
     }
 
 }
