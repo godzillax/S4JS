@@ -102,7 +102,7 @@ function init_playerControll() {
  * Init the main Loop by defining the fps
  */
 function init_mainLoopManagement() {
-    fps = 65;
+    fps = 70;
     lastTimeStampUpdate = 0;
 }
 
@@ -284,11 +284,11 @@ function update() {
  * If the player reach 0 hp, the game is over
  */
 function mainLoop() {
-    t = timestamp()
-    if (t > lastTimeStampUpdate + (1000 / fps)) {
+    if (timestamp() > lastTimeStampUpdate + (1000 / fps)) {
         update();
-        lastTimeStampUpdate = t;
+        lastTimeStampUpdate = timestamp();
     }
+
     if (player.hp == 0) {
         t = timestamp()
         announcer.setLongMessage("GAME OVER")

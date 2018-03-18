@@ -8,7 +8,7 @@
 function Shot(shooter, speed) {
     this.coordX;
     this.coordY;
-    
+
     this.speed = 10;
 
     // Contains the <img> html tag
@@ -18,7 +18,7 @@ function Shot(shooter, speed) {
     this.balise_shoot;
 
     this.audio;
-    
+
     // The html tag where the audio will be
     this.balAudio;
 
@@ -115,26 +115,28 @@ function Shot(shooter, speed) {
      */
     this.hit = function (obj) {
         var col = false;
-        //Vu que la hitbox de obj est plus grande que sa forme, on prend le milieu du tir, c'est plus joli.
-        if (this.coordX + this.width / 2 >= obj.coordX && this.coordX + this.width / 2 <= obj.coordX + obj.width) {
-            if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
-                col = true;
-            }
-            if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
-                col = true;
-            }
-        }
-        if (Object.getPrototypeOf(obj).constructor.name === Object.getPrototypeOf(shooter).constructor.name) {
-            col = false;
-        }
-        if (col) {
-            if (Object.getPrototypeOf(obj).constructor.name == "Enemy") {
-                if (obj.willBeDead()) {
-                    obj.addScore();
+        if (obj.health >= 0) {
+            //Vu que la hitbox de obj est plus grande que sa forme, on prend le milieu du tir, c'est plus joli.
+            if (this.coordX + this.width / 2 >= obj.coordX && this.coordX + this.width / 2 <= obj.coordX + obj.width) {
+                if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
+                    col = true;
+                }
+                if ((this.coordY > obj.coordY) && (this.coordY < obj.coordY + obj.height)) {
+                    col = true;
                 }
             }
-            obj.hit();
-            this.death();
+            if (Object.getPrototypeOf(obj).constructor.name === Object.getPrototypeOf(shooter).constructor.name) {
+                col = false;
+            }
+            if (col) {
+                if (Object.getPrototypeOf(obj).constructor.name == "Enemy") {
+                    if (obj.willBeDead()) {
+                        obj.addScore();
+                    }
+                }
+                obj.hit();
+                this.death();
+            }
         }
         return col;
     }
