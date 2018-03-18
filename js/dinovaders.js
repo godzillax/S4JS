@@ -9,7 +9,11 @@
  * The player has to  repel waves of enemies, who will be more and more numerous
  * The objective is to make the best score possible before dying.
  * The player has 5 hp, and makes points killing enemies.
+ * Succesfully completing a wave gives an extra 100 points
  * 
+ * Controls :
+ *      - The player can move UP and DOWN using the arrows keys or "Z" and "S"
+ *      - The player can shoot with the space bar
  */
 
 /**
@@ -221,6 +225,7 @@ function manageEnemies() {
     if (enemiesArray.length == 0) {
         wave++;
         announcer.setMessage("WAVE " + wave)
+        player.score += 100
         init_Enemies()
     } else {
         for (i = 0; i < enemiesArray.length; i++) {
