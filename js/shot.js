@@ -115,7 +115,7 @@ function Shot(shooter, speed) {
      */
     this.hit = function (obj) {
         var col = false;
-        if (obj.health >= 0) {
+        if (obj.hp > 0 || obj.health > 0) {
             //Vu que la hitbox de obj est plus grande que sa forme, on prend le milieu du tir, c'est plus joli.
             if (this.coordX + this.width / 2 >= obj.coordX && this.coordX + this.width / 2 <= obj.coordX + obj.width) {
                 if ((this.coordY < obj.coordY) && (this.coordY + this.height > obj.coordY)) {
