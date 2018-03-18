@@ -1,0 +1,3 @@
+function initMainMenu() {
+    initGame();
+}
