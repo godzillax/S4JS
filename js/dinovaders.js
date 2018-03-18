@@ -56,7 +56,8 @@ function init_Enemies(nbEnemies, nbgroups) {
     document.getElementById('enemy').innerHTML = "";
     enemiesArray = new Array();
     if (nbgroups && nbEnemies) {
-
+        for (i = 0; i < nbgroups; i++)
+            enemiesArray.push(new EnemyGroup(nbEnemies, Math.floor(Math.random() * 1)));
     } else {
         r = Math.floor(Math.random() * wave * 10)
         if (r < wave * 3)
@@ -318,11 +319,12 @@ function gameOver() {
 }
 
 /**
- * Reset the game for a new one
+ * Reset the game and go back to the main menu
  * @returns {undefined}
  */
-function resetGame() {
-    bannerMenu.removeBanner()
+function resetGame(displayMM) {
+    if (typeof bannerMenu !== "undefined")
+        bannerMenu.removeBanner()
     document.getElementById("announcer").innerHTML = "";
     document.getElementById('score').innerHTML = "";
     document.getElementById('enemy').innerHTML = "";
@@ -330,5 +332,6 @@ function resetGame() {
     document.getElementById('player').innerHTML = "";
     document.getElementById('shot').innerHTML = "";
     document.getElementById('audio').innerHTML = "";
+    
     displayMainMenu()
 }

@@ -1,3 +1,7 @@
+/**
+ * Init the main Menu
+ * @returns {undefined}
+ */
 function initMainMenu() {
     mainMenuDiv = document.createElement("div")
     mainMenuDiv.id = "mainMenu"
@@ -14,6 +18,10 @@ function initMainMenu() {
     displayMainMenu()
 }
 
+/**
+ * Displays the main menu
+ * @returns {undefined}
+ */
 function displayMainMenu() {
     document.getElementById("playground").appendChild(mainMenuDiv)
     mainMenuDiv.appendChild(gameTitle)
@@ -21,6 +29,10 @@ function displayMainMenu() {
     
 }
 
+/**
+ * Removes the main menu and start the game
+ * @returns {undefined}
+ */
 function launch() {
     mainMenuDiv.innerHTML = "";
     mainMenuDiv.parentNode.removeChild(mainMenuDiv)

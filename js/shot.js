@@ -1,7 +1,6 @@
-
 /**
  * A bullet that will be shot from an enemy or player
- * @param {enemy,player} shooter The source of the shot
+ * @param {enemy} {player} shooter The source of the shot
  * @param {type} speed the velocity
  * @returns {Shot}
  */
