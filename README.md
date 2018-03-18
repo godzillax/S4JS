@@ -1,8 +1,7 @@
-//////////////////////////////////////////////////////
-//                  Dinovaders                      //
-//               Javascript Project                 //
-// Dorian Laurancy - Arnaud Ducret - Weslie Rabeson //
-//////////////////////////////////////////////////////
+                 Dinovaders                      
+            Javascript Project                 
+Dorian Laurancy - Arnaud Ducret - Weslie Rabeson 
+
 
 Projet de Javascript - G2
 
