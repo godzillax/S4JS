@@ -36,7 +36,7 @@ function Player() {
     this.init = function () {
         this.balise_perso = document.getElementById('player');
         this.img = document.createElement("img");
-        this.img.src = "./Images/player.png";
+        this.img.src = "./Images/player.gif";
         this.img.style.width = "100%";
         this.coordY = (window.innerHeight / 2) - 50;
 
@@ -164,17 +164,17 @@ function Player() {
             this.lastBlink = this.t;
            
             if(this.blinker%2==0) {
-                this.img.src = "./Images/playerHit.png";
+                this.img.src = "./Images/playerHit.gif";
                 this.blinker-=1;
             } else if (this.blinker%2==1)  {
-                this.img.src = "./Images/player.png";
+                this.img.src = "./Images/player.gif";
                 this.blinker-=1;
             }
             
         }
 
         if (this.blinker <= -1) {
-            this.img.src = "./Images/player.png";
+            this.img.src = "./Images/player.gif";
             this.isHit = 0;
         }
 
