@@ -1,3 +1,7 @@
+/**
+ * The banner menu on top of the game
+ * @returns {Menu}
+ */
 function Menu() {
     this.menuBar;
     this.playMusicButton;
