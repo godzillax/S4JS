@@ -40,24 +40,6 @@ function Player() {
         this.img.style.width = "100%";
         this.coordY = (window.innerHeight / 2) - 50;
 
-
-        //would be creating the audio
-
-        //read on some sites that it's better to add a 
-        //source element of type audio rather than a audio element
-        //to avoid the error, but doesn't seem to work either
-        //dunno, i'm lost
-
-        // https://developers.google.com/web/updates/2017/06/play-request-was-interrupted
-
-        //end of commenting 
-
-
-        // this.playerAudio = document.getElementById("audio");
-        // this.audio = document.createElement("audio");
-        // this.audio.src = "./son/atari_boom.wav";
-        // this.playerAudio.appendChild(this.audio);
-
         this.spawn();
     }
 

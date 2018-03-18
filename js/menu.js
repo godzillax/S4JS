@@ -11,10 +11,6 @@ function Menu() {
         this.menuBar.style.left = "400px";
         this.menuBar.id = "BannerMenu"
 
-        // this.playButton = document.createElement("img");
-        // this.playButton.src = "./Images/start.png";
-        // this.playButton.style.height = "70px";
-
         this.pauseButton = document.createElement("img");
         this.pauseButton.src = "./Images/pause.png";
         this.pauseButton.style.height = "70px";
@@ -37,20 +33,23 @@ function Menu() {
         this.pauseMusicButton.addEventListener("click", this.restartMusic.bind(this))
         
         this.pauseButton.addEventListener("click", this.pauseGame.bind(this));
-        // this.playButton.addEventListener("click", this.startGame.bind(this));
-
 
         this.display();
     }
 
+    /*
+    * Creates the banner menu
+    */
     this.display = function () {
-        // this.menuBar.appendChild(this.playButton);
         this.menuBar.appendChild(this.pauseButton);
         this.menuBar.appendChild(this.quitButton);
         this.menuBar.appendChild(this.playMusicButton);
         document.getElementById("playground").appendChild(this.menuBar);
     }
 
+    /**
+    * Stops the music
+    */
     this.stopMusic = function () {
         balAudio = document.getElementById("audio");
         balAudio.firstElementChild.pause();
@@ -59,6 +58,9 @@ function Menu() {
         this.menuBar.appendChild(this.pauseMusicButton);
     }
 
+    /**
+    * Restarts the music
+    */
     this.restartMusic = function () {
         
         balAudio = document.getElementById("audio");
@@ -67,33 +69,19 @@ function Menu() {
         this.menuBar.removeChild(this.pauseMusicButton)
         this.menuBar.appendChild(this.playMusicButton);
     }
-
-    this.startGame = function () {
-        this.menuBar.removeChild(this.quitButton);
-        resetGame();
-
-        this.quitButton.removeEventListener("click", this.startGame.bind(this));
-        this.quitButton.addEventListener("click", this.stopGame.bind(this));
-    }
-
+    
+    /**
+    * Stops the game
+    */
     this.stopGame = function () {
         this.resumeGame()
         this.menuBar.innerHTML = "";
         resetGame()
-        
-        
-//
-//        fps = 0;
-//        
-//        announcer.print("YOUR SCORE : " + player.score);
-//
-//        this.quitButton.src = "./Images/start.png";
-//        this.menuBar.appendChild(this.quitButton);
-//
-//        this.quitButton.removeEventListener("click", this.stopGame.bind(this));
-//        this.quitButton.addEventListener("click", this.startGame.bind(this));
     }
 
+    /*
+    * Pauses the game
+    */
     this.pauseGame = function () {
         document.getElementById("playground").style.opacity = 0.5;
         
@@ -105,7 +93,9 @@ function Menu() {
         this.pauseButton.removeEventListener("click", this.pauseGame.bind(this));
         this.pauseButton.addEventListener("click", this.resumeGame.bind(this));
     }
-
+    /*
+    * Resumes the game
+    */
     this.resumeGame = function () {
         document.getElementById("playground").style.opacity = 1.0;
         
@@ -118,6 +108,9 @@ function Menu() {
         this.pauseButton.addEventListener("click", this.pauseGame.bind(this));
     }
     
+    /**
+    * Removes the banner
+    */
     this.removeBanner = function () {
         this.menuBar.parentNode.removeChild(this.menuBar)
     }
