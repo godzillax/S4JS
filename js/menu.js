@@ -10,9 +10,9 @@ function Menu() {
         this.menuBar.style.position = "fixed";
         this.menuBar.style.left = "400px";
 
-        this.playButton = document.createElement("img");
-        this.playButton.src = "./Images/start.png";
-        this.playButton.style.height = "70px";
+        // this.playButton = document.createElement("img");
+        // this.playButton.src = "./Images/start.png";
+        // this.playButton.style.height = "70px";
 
         this.pauseButton = document.createElement("img");
         this.pauseButton.src = "./Images/pause.png";
@@ -29,14 +29,14 @@ function Menu() {
         this.quitButton.addEventListener("click", this.stopGame.bind(this));
         this.musicButton.addEventListener("click", this.stopMusic.bind(this))
         this.pauseButton.addEventListener("click", this.pauseGame.bind(this));
-        this.playButton.addEventListener("click", this.startGame.bind(this));
+        // this.playButton.addEventListener("click", this.startGame.bind(this));
 
 
         this.display();
     }
 
     this.display = function () {
-        this.menuBar.appendChild(this.playButton);
+        // this.menuBar.appendChild(this.playButton);
         this.menuBar.appendChild(this.pauseButton);
         this.menuBar.appendChild(this.quitButton);
         this.menuBar.appendChild(this.musicButton);
@@ -64,15 +64,29 @@ function Menu() {
     }
 
     this.startGame = function () {
+        this.menuBar.removeChild(this.quitButton);
+        resetGame();
 
+        this.quitButton.removeEventListener("click", this.startGame.bind(this));
+        this.quitButton.addEventListener("click", this.stopGame.bind(this));
     }
 
     this.stopGame = function () {
+        this.menuBar.innerHTML = "";
 
+        fps = 0;
+        
+        announcer.print("YOUR SCORE : " + player.score);
+
+        this.quitButton.src = "./Images/start.png";
+        this.menuBar.appendChild(this.quitButton);
+
+        this.quitButton.removeEventListener("click", this.stopGame.bind(this));
+        this.quitButton.addEventListener("click", this.startGame.bind(this));
     }
 
     this.pauseGame = function () {
-        document.getElementById("playground").style.opacity = 0.4;
+        document.getElementById("playground").style.opacity = 0.5;
         
         this.pauseButton.src = "./Images/restart.png";
                 
