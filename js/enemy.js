@@ -42,7 +42,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
 
         this.image.style.position = "fixed";
         if (!imgsrc) {
-            this.image.src = "./Images/Drone.png";
+            this.image.src = "./Images/DroneType3.gif";
         } else
             this.image.src = this.imagesrc;
         this.image.style.position = "fixed";
