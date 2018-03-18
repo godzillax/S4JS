@@ -15,7 +15,7 @@ function Menu() {
         this.playButton.style.height = "70px";
 
         this.pauseButton = document.createElement("img");
-        this.pauseButton.src = "";
+        this.pauseButton.src = "./Images/pause.png";
         this.pauseButton.style.height = "70px";
 
         this.quitButton = document.createElement("img");
@@ -36,40 +36,27 @@ function Menu() {
     }
 
     this.display = function () {
-        document.getElementById("playground").appendChild(this.menuBar);
         this.menuBar.appendChild(this.playButton);
         this.menuBar.appendChild(this.pauseButton);
         this.menuBar.appendChild(this.quitButton);
         this.menuBar.appendChild(this.musicButton);
+        document.getElementById("playground").appendChild(this.menuBar);
     }
 
     this.stopMusic = function () {
-        console.log("STOPMUSIC")
-
-        this.musicButton.parentNode.removeChild(this.musicButton)
-
         this.musicButton.src = "./Images/soundOff.png";
-        this.menuBar.appendChild((this.musicButton))
-
+        
         balAudio = document.getElementById("audio");
-        balAudio.firstElementChild.volume = 0;
         balAudio.firstElementChild.pause();
-
 
         this.musicButton.removeEventListener("click", this.stopMusic.bind(this));
         this.musicButton.addEventListener("click", this.restartMusic.bind(this));
     }
 
     this.restartMusic = function () {
-        console.log("restartMusic")
-
-        this.musicButton.parentNode.removeChild(this.musicButton)
-        
         this.musicButton.src = "./Images/soundOn.png";
-        this.menuBar.appendChild(this.musicButton)
-
+        
         balAudio = document.getElementById("audio");
-        balAudio.firstElementChild.volume = 0.15;
         balAudio.firstElementChild.play();
 
         this.musicButton.removeEventListener("click", this.restartMusic.bind(this));
@@ -80,15 +67,32 @@ function Menu() {
 
     }
 
-    this.pauseGame = function () {
-
-    }
-
-    this.resumeGame = function () {
-
-    }
-
     this.stopGame = function () {
 
     }
+
+    this.pauseGame = function () {
+        document.getElementById("playground").style.opacity = 0.4;
+        
+        this.pauseButton.src = "./Images/restart.png";
+                
+        fps = 0;
+        announcer.print("PAUSE");
+
+        this.pauseButton.removeEventListener("click", this.pauseGame.bind(this));
+        this.pauseButton.addEventListener("click", this.resumeGame.bind(this));
+    }
+
+    this.resumeGame = function () {
+        document.getElementById("playground").style.opacity = 1.0;
+        
+        this.pauseButton.src = "./Images/pause.png";
+                
+        fps = 70;
+        announcer.removeMessage();
+
+        this.pauseButton.removeEventListener("click", this.resumeGame.bind(this));
+        this.pauseButton.addEventListener("click", this.pauseGame.bind(this));
+    }
+
 }
