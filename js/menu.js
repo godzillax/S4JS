@@ -12,26 +12,26 @@ function Menu() {
 
 		this.playButton = document.createElement("img");
 		
-		this.playButton.setAttribute("onclick", "this.startGame()");
 		this.playButton.src = "./Images/start.png";
+		this.playButton.addEventListener("click", this.startGame);
 		this.playButton.style.height = "70px";
 
 		this.pauseButton = document.createElement("img");
 		
-		this.pauseButton.setAttribute("onclick", "this.pauseGame()");
 		this.pauseButton.src = "";
+		this.pauseButton.addEventListener("click", this.pauseGame);
 		this.pauseButton.style.height = "70px";
 
 		this.quitButton = document.createElement("img");
 		
-		this.quitButton.setAttribute("onclick", "this.stopGame()");
 		this.quitButton.src = "./Images/quit.png";
+		this.quitButton.addEventListener("click", this.stopGame);
 		this.quitButton.style.height = "70px";
 		
 		this.musicButton = document.createElement("img");
 		
-		this.musicButton.setAttribute("onclick", "this.stopMusic()");
 		this.musicButton.src = "./Images/soundOn.png";
+		this.musicButton.addEventListener("click", this.stopMusic, true);
 		this.musicButton.style.height = "70px";
 
 		this.display();
@@ -49,19 +49,23 @@ function Menu() {
 	this.stopMusic = function() {
 		balAudio = document.getElementById("audio");
 		
-		balAudio.firstElementChild.volume = 0;
-
-		this.musicButton.setAttribute("onclick", "this.restartMusic()");
+		this.musicButton.src = "";
 		this.musicButton.src = "./Images/soundOff.png";
+		
+		// balAudio.firstElementChild.volume = 0;
+		balAudio.firstElementChild.pause();
+		this.musicButton.addEventListener("click", this.restartMusic, true);
 	}
 
 	this.restartMusic = function() {
 		balAudio = document.getElementById("audio");
 
-		balAudio.firstElementChild.volume = 0.15;
-
-		this.musicButton.setAttribute("onclick", "this.stopMusic()");
+		// balAudio.firstElementChild.volume = 0.15;
+		balAudio.firstElementChild.play();
+		//this.musicButton.removeEventListener("click", this.restartMusic, true);
+		this.musicButton.src = "";
 		this.musicButton.src = "./Images/soundOn.png";
+		this.musicButton.addEventListener("click", this.stopMusic, true);
 	}
 
 	this.startGame = function() {

@@ -36,6 +36,8 @@ function initGame() {
     announcer.setMessage("WAVE 1")
 
     requestAnimationFrame(mainLoop);
+
+    init_menu()
 }
 
 /**
@@ -44,6 +46,11 @@ function initGame() {
 function init_player() {
     player = new Player();
     player.init();
+}
+
+function init_menu() {
+    menu = new Menu();
+    menu.init();
 }
 
 /**
