@@ -330,5 +330,5 @@ function resetGame() {
     document.getElementById('player').innerHTML = "";
     document.getElementById('shot').innerHTML = "";
     document.getElementById('audio').innerHTML = "";
-    initGame();
+    displayMainMenu()
 }

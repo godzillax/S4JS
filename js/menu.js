@@ -78,16 +78,19 @@ function Menu() {
 
     this.stopGame = function () {
         this.menuBar.innerHTML = "";
-
-        fps = 0;
+        resetGame()
         
-        announcer.print("YOUR SCORE : " + player.score);
-
-        this.quitButton.src = "./Images/start.png";
-        this.menuBar.appendChild(this.quitButton);
-
-        this.quitButton.removeEventListener("click", this.stopGame.bind(this));
-        this.quitButton.addEventListener("click", this.startGame.bind(this));
+        
+//
+//        fps = 0;
+//        
+//        announcer.print("YOUR SCORE : " + player.score);
+//
+//        this.quitButton.src = "./Images/start.png";
+//        this.menuBar.appendChild(this.quitButton);
+//
+//        this.quitButton.removeEventListener("click", this.stopGame.bind(this));
+//        this.quitButton.addEventListener("click", this.startGame.bind(this));
     }
 
     this.pauseGame = function () {
