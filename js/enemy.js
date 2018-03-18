@@ -59,8 +59,10 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
             }
         } else {
             this.disappear--;
-            if (this.disappear == 0)
+            if (this.disappear == 0 && this.audio) {
                 div.removeChild(this.image);
+                document.getElementById("audio").removeChild(this.audio)
+            }
         }
     }
     /**
@@ -125,19 +127,25 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     }
 
 
+    /**
+     * Manages the collision with the player : If the enemy collides with the player, it is destroyed, and damages the player
+     * @returns {Boolean}
+     */
     this.collisionPlayer = function () {
         if ((this.coordX >= player.coordX && this.coordX <= player.coordX + player.width) || (this.coordX + this.width >= player.coordX && this.coordX + this.width <= player.coordX + player.width)) {
             if ((this.coordY >= player.coordY && this.coordY <= player.coordY + player.height) || (this.coordY + this.height >= player.coordY && this.coordY + this.height <= player.coordY + player.height)) {
                 player.hit();
-                this.hit();
+                this.death();
                 // We place the enemy out of the map to avoid an infinite loop : The enemy has already collided with the player, we make sure it will not happen again
-                this.coordX = -100; 
-                return true
+                this.coordY = -100;
             }
         }
-        return false
     }
-    
+
+    /**
+     * Called when the enemy is hit : remove1 hp and call death if the enemy has 0 hp
+     * @returns {undefined}
+     */
     this.hit = function () {
         this.health--;
         if (this.health === 0) {
@@ -145,13 +153,31 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
         }
     }
 
+    /**
+     * When the enemy reach 0 hp, it explode then dies
+     * It doesn't explode when it reach the border of the map, but stil dies
+     * @returns {undefined}
+     */
     this.death = function () {
         if (!this.removed) {
             this.health = 0;
             this.removed = 1;
             div.removeChild(this.image);
-            this.image.src = "./Images/explosion.png";
-            div.appendChild(this.image)
+
+            if (this.coordX > 0) {
+                this.image.src = "./Images/explosion.png";
+                div.appendChild(this.image)
+
+
+                let audio = document.getElementById("audio");
+                this.audio = document.createElement("audio");
+                this.audio.src = "./son/atari_boom.wav";
+                audio.appendChild(this.audio);
+                this.audio.play();
+            }
+
+
+
         }
     }
 
