@@ -174,8 +174,7 @@ function makePlayerAction() {
     else if (lastPressedKey == 40 || lastPressedKey == 83)
         player.down();
     // If the window is resized, the dino may be out of the map, this function prevents it
-    else
-        player.checkOutMap();
+    player.checkOutMap();
 
     // 'Space'
     if (lastShot == 1)

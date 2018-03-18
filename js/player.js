@@ -13,7 +13,7 @@ function Player() {
     this.playerAudio;
 
     // Shoot cadency in ms
-    this.cadency = 0.5;
+    this.cadency = 0.33;
     
     // The time when the last shot was fired by the object
     this.lastShot = 0;
@@ -28,7 +28,7 @@ function Player() {
     this.img;
     this.isHit = 0;
 
-    this.speed = 15;
+    this.speed = 20;
     /**
      * Called when the game is initialised. 
      * Initiates the player
