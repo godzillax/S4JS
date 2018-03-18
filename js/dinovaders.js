@@ -24,6 +24,7 @@ function initGame() {
     announcer.init();
 
     init_wave()
+    init_menu()
     init_player()
     init_shots()
     init_Enemies()
@@ -85,6 +86,11 @@ function init_mainMusic() {
     mainMusic.loop = "true"
     mainMusic.volume = 0.15
     mainMusic.play();
+}
+
+function init_menu() {
+    bannerMenu = new Menu();
+    bannerMenu.init()
 }
 
 /**
