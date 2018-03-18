@@ -9,7 +9,7 @@ function Shot(shooter, speed) {
     this.coordX;
     this.coordY;
 
-    this.speed = 10;
+    this.speed = 15;
 
     // Contains the <img> html tag
     this.img_shoot;
