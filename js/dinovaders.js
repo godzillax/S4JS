@@ -1,9 +1,16 @@
 //////////////////////////////////////////////////////
-//                  Jeu Dinovaders                  //
-//               Projet de Javascript               //
+//                  Dinovaders                      //
+//               Javascript Project                 //
 // Dorian Laurancy - Arnaud Ducret - Weslie Rabeson //
 //////////////////////////////////////////////////////
 
+/**
+ * This game is an adaptation of Space Invaders.
+ * The player has to  repel waves of enemies, who will be more and more numerous
+ * The objective is to make the best score possible before dying.
+ * The player has 5 hp, and makes points killing enemies.
+ * 
+ */
 
 /**
  * Called when the page loads. It will initiates all the elements, then launch the game
@@ -26,6 +33,9 @@ function initGame() {
     requestAnimationFrame(mainLoop);
 }
 
+/**
+ * Creates and inits the player
+ */
 function init_player() {
     player = new Player();
     player.init();
@@ -52,10 +62,17 @@ function init_Enemies(nbEnemies, nbgroups) {
     }
 }
 
+/**
+ * Creates the array that will contain all the shots (bullets)
+ * @returns {undefined}
+ */
 function init_shots() {
     shotArray = new Array();
 }
 
+/**
+ * The game will be playing a music that is initialised and played here
+ */
 function init_mainMusic() {
     balAudio = document.getElementById("audio");
     mainMusic = document.createElement("audio");
@@ -66,6 +83,9 @@ function init_mainMusic() {
     mainMusic.play();
 }
 
+/**
+ * Ininialise the listeners for the controls of the player
+ */
 function init_playerControll() {
     document.body.addEventListener("keydown", playerAction);
     document.body.addEventListener("keyup", playerActionEnd);
@@ -74,11 +94,18 @@ function init_playerControll() {
     playerActionCheck = 0;
 }
 
+/**
+ * Init the main Loop by defining the fps
+ */
 function init_mainLoopManagement() {
     fps = 65;
     lastTimeStampUpdate = 0;
 }
 
+
+/**
+ * init the first wave
+ */
 function init_wave() {
     wave = 1;
 }
@@ -165,7 +192,9 @@ function manageShot() {
     }
 }
 
-//Marche pas au niveau de la giant boucle
+/**
+ * Manages the movement and collision of the shots
+ */
 function manageShot() {
     for (i = 0; i < shotArray.length; i++) {
         for (j = 0; j < enemiesArray.length; j++) {
@@ -184,7 +213,10 @@ function manageShot() {
     }
 }
 
-
+/**
+ * Maage the creation enemies waves creation
+ * @returns {undefined}
+ */
 function manageEnemies() {
     if (enemiesArray.length == 0) {
         wave++;
@@ -198,14 +230,21 @@ function manageEnemies() {
 }
 
 
-
+/**
+ * Updates the printing of the score on the screen
+ */
 function maj_score(p) {
-    balscore = document.getElementById("score");
-    balscore.innerHTML = "";
-    textScore = document.createElement("p");
-    textScore.innerHTML = "";
-    textScore.innerHTML = "Score : " + p.score + " ";
-    balscore.appendChild(textScore);
+    if (typeof sc === "undefined")
+        sc = 0;
+    if (sc != player.score) {
+        balscore = document.getElementById("score");
+        balscore.innerHTML = "";
+        textScore = document.createElement("p");
+        textScore.innerHTML = "";
+        textScore.innerHTML = "Score : " + p.score + " ";
+        balscore.appendChild(textScore);
+        sc = player.score;
+    }
 }
 
 /**
@@ -254,8 +293,13 @@ function mainLoop() {
         requestAnimationFrame(mainLoop);
 }
 
+
+/**
+ * The game Over screen: print "game over" then "your score"
+ * @returns {undefined}
+ */
 function gameOver() {
-    if (timestamp() > t+2000)
+    if (timestamp() > t + 2000)
         announcer.setLongMessage("YOUR SCORE : " + player.score)
     if (timestamp() > (t + 5000)) {
         resetGame()
@@ -263,6 +307,10 @@ function gameOver() {
         requestAnimationFrame(gameOver);
 }
 
+/**
+ * Reset the game for a new one
+ * @returns {undefined}
+ */
 function resetGame() {
     document.getElementById("announcer").innerHTML = "";
     document.getElementById('score').innerHTML = "";

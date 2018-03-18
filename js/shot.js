@@ -18,6 +18,8 @@ function Shot(shooter, speed) {
     this.balise_shoot;
 
     this.audio;
+    
+    // The html tag where the audio will be
     this.balAudio;
 
     this.width = 25;

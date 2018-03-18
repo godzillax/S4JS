@@ -1,3 +1,17 @@
+/**
+ * An Ennemy
+ * @param {type} x the Coordinate X
+ * @param {type} y the coordinate Y
+ * @param {type} hp the health of the enemy
+ * @param {type} speed its velocity
+ * @param {type} w the width
+ * @param {type} h the height
+ * @param {type} cadency the pace it will shoot
+ * @param {type} pts the points it will give to the player if killed
+ * @param {type} div the parent div where it's image has to be inserted
+ * @param {type} imgsrc the src of its image
+ * @returns {Enemy}
+ */
 function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
     this.coordX;
     this.coordY;
@@ -36,6 +50,10 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
         this.spawn();
     }
 
+    /**
+     * Place the enemy on the screen
+     * @returns {undefined}
+     */
     this.spawn = function () {
         if (!div) {
             document.getElementById("enemy").appendChild(this.image)
@@ -43,6 +61,10 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
             div.appendChild(this.image);
     }
 
+    /**
+     * Update the position and kills the enemy if it is outscreen
+     * @returns {undefined}
+     */
     this.updatePosition = function () {
         if (!this.removed) {
             if (this.coordX < -this.width) {
@@ -58,6 +80,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
                 }
             }
         } else {
+            // When it dies, it explodes and takes a little time to disappear
             this.disappear--;
             if (this.disappear == 0 && this.audio) {
                 div.removeChild(this.image);
@@ -66,7 +89,7 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
         }
     }
     /**
-     * 
+     * Moves the enemy
      * @param entier entre 0 et 7 indiquant la direction a
      */
     this.move = function (a) {
@@ -181,6 +204,10 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
         }
     }
 
+    /**
+     * Make the enemy shoot
+     * @returns {undefined}
+     */
     this.shoot = function () {
         if (this.coordX < window.innerWidth && this.coordY < window.innerHeight && this.coordX > 0 && this.coordY > 0) {
             if (this.pace != -1) {
@@ -196,10 +223,15 @@ function Enemy(x, y, hp, speed, w, h, cadency, pts, div, imgsrc) {
         }
     }
 
+    /**
+     * Add the score to the player total score
+     * @returns {undefined}
+     */
     this.addScore = function () {
         player.score += this.points;
     }
 
+// Fonction utilisee ???
     this.willBeDead = function () {
         return this.health === 1;
     }

@@ -1,4 +1,8 @@
 
+/**
+ * The player
+ * @returns {Player}
+ */
 function Player() {
     this.coordX = 75;
     this.coordY;
