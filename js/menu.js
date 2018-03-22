@@ -79,8 +79,9 @@ function Menu() {
     */
     this.stopGame = function () {
         this.resumeGame()
-        this.menuBar.innerHTML = "";
-        resetGame()
+//        this.menuBar.innerHTML = "";
+//        resetGame()
+        player.hp = 0;
     }
 
     /*
